@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 interface Props {}
 
 const Team: React.FC<Props> = (props) => {
@@ -8,9 +10,9 @@ const Team: React.FC<Props> = (props) => {
       <td>21 KenOng </td>
       <td>2 </td>
       <td>
-        <a href='edit_team.php?id=10' className='btn btn-primary'>
+        <Link to='/teams/1/edit' className='btn btn-primary'>
           Edit
-        </a>
+        </Link>
         <a href='?action=delete&id=10' className='btn btn-danger'>
           Delete
         </a>

@@ -1,27 +1,25 @@
 import React, { useState } from "react";
 import TeamForm from "../team-form";
 
-interface Props {}
-interface Leader {
-  name: string;
-  id: string;
+interface Props {
+  match: { params: { id: string } };
 }
 
-const AddTeam: React.FC<Props> = () => {
+const EditTeam: React.FC<Props> = (props) => {
+  console.log(props.match.params.id);
+  const [initialValues, setInitialValues] = useState({
+    leader: "",
+    teamName: "",
+  });
   const handleResetClick = (values: TeamType) => {};
 
   const handleSaveClick = (values: TeamType) => {
     console.log(values);
   };
 
-  const initialValues = {
-    leader: "",
-    teamName: "",
-  };
-
   return (
     <div className='card shadow'>
-      <div className='card-header'>Add New Team</div>
+      <div className='card-header'>Edit Team</div>
       <div className='card-body'>
         <TeamForm
           dangerText='Reset'
@@ -34,4 +32,4 @@ const AddTeam: React.FC<Props> = () => {
   );
 };
 
-export default AddTeam;
+export default EditTeam;

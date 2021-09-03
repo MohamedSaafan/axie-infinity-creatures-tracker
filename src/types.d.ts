@@ -14,3 +14,8 @@ interface AxieType {
   isGoodForBreeding: boolean;
   comment: string;
 }
+
+interface TeamType {
+  teamName: string;
+  leader: string;
+}
