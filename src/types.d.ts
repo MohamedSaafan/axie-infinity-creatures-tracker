@@ -19,3 +19,9 @@ interface TeamType {
   teamName: string;
   leader: string;
 }
+
+interface ScholarType {
+  scholarName: string;
+  team: string;
+  walletId: string;
+}

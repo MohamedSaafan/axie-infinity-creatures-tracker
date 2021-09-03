@@ -9,6 +9,7 @@ import AddTeam from "./features/add-team";
 import AddScholar from "./features/add-scholar";
 import EditAxie from "./features/edit-axie";
 import EditTeam from "./features/edit-team";
+import EditScholar from "./features/edit-scholar";
 function App() {
   return (
     <BrowserRouter>
@@ -21,8 +22,9 @@ function App() {
           <Route path='/teams' exact component={Teams} />
           <Route path='/teams/add' component={AddTeam} />
           <Route path='/teams/:id/edit' component={EditTeam} />
-          <Route path='/scholars' component={Scholars} />
+          <Route path='/scholars' exact component={Scholars} />
           <Route path='/scholars/add' component={AddScholar} />
+          <Route path='/scholars/:id/edit' component={EditScholar} />
           <Redirect to='/axies' />
         </Switch>
       </div>
