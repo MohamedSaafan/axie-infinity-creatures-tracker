@@ -7,18 +7,20 @@ import Scholars from "./features/scholars";
 import AddAxie from "./features/add-axie";
 import AddTeam from "./features/add-team";
 import AddScholar from "./features/add-scholar";
+import EditAxie from "./features/edit-axie";
 function App() {
   return (
     <BrowserRouter>
       <NavBar />
       <div className='container mt-5'>
         <Switch>
-          <Route path='/axies' component={Axies} />
-          <Route path='/teams' component={Teams} />
+          <Route path='/axies' exact component={Axies} />
+          <Route path='/axies/add' component={AddAxie} />
+          <Route path='/axies/:id/edit' component={EditAxie} />
+          <Route path='/teams' exact component={Teams} />
           <Route path='/scholars' component={Scholars} />
-          <Route path='/add-axie' component={AddAxie} />
-          <Route path='/add-team' component={AddTeam} />
-          <Route path='/add-scholar' component={AddScholar} />
+          <Route path='/teams/add' component={AddTeam} />
+          <Route path='/scholars/add' component={AddScholar} />
           <Redirect to='/axies' />
         </Switch>
       </div>

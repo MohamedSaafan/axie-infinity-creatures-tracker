@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 interface Props {}
 
 const Axie: React.FC<Props> = (props) => {
@@ -35,12 +35,12 @@ const Axie: React.FC<Props> = (props) => {
             <li className='list-group-item'>
               <span className='row-drop-down__label'>Action</span>{" "}
               <span className='d-inline-block ml-5'>
-                <a
-                  href='edit_axie.php?id=125'
+                <Link
+                  to='/axies/1/edit'
                   className='btn btn-primary edit-row-btn'
                 >
                   Edit
-                </a>
+                </Link>
               </span>
               <a href='?action=delete&id=125' className='btn btn-danger mr-5'>
                 Delete

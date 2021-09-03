@@ -47,7 +47,7 @@ const NavBar: React.FC<Props> = (props) => {
                   </DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem>
-                    <NavLink to='/add-axie'>Add Axie</NavLink>
+                    <NavLink to='/axies/add'>Add Axie</NavLink>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
@@ -63,7 +63,7 @@ const NavBar: React.FC<Props> = (props) => {
                   </DropdownItem>
                   <DropdownItem divider />{" "}
                   <DropdownItem>
-                    <NavLink to='/add-scholar'>Add Scholar</NavLink>
+                    <NavLink to='/scholars/add'>Add Scholar</NavLink>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
@@ -79,7 +79,7 @@ const NavBar: React.FC<Props> = (props) => {
                   </DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem>
-                    <NavLink to='/add-team'>Add Team</NavLink>
+                    <NavLink to='/teams/add'>Add Team</NavLink>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
