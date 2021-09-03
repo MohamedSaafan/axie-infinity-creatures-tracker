@@ -1,0 +1,45 @@
+.plusicon {
+  background-color: #31b131 !important;
+  height: 1em;
+  width: 1em;
+  display: block;
+  color: white;
+  border: 0.15em solid white;
+  border-radius: 1em;
+  box-shadow: 0 0 0.2em #444;
+  box-sizing: content-box;
+  text-align: center;
+  text-indent: 0 !important ;
+  font-family: "Courier New", Courier, monospace;
+  line-height: 1em;
+  cursor: pointer;
+}
+
+.row-drop-down {
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: all 90ms linear;
+  display: none;
+  position: relative;
+  min-height: 300px;
+}
+
+.row-drop-down__content {
+  position: absolute;
+  min-width: 50vw;
+}
+
+.row-drop-down-opened {
+  display: block;
+  transform: scaleY(1);
+}
+.row-drop-down__label {
+  font-weight: bold;
+  margin-right: 1rem;
+  display: inline-block;
+  font-size: 20px;
+}
+
+.edit-row-btn {
+  margin-right: 1rem;
+}
