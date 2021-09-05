@@ -1,18 +1,15 @@
-interface CreatureClass {
-  name: string;
-  id: string;
-}
 interface AxieType {
-  axieNumber: string;
-  scholar: string;
-  creatureClass: CreatureClass | null;
+  number: string;
+  scholar_id: string;
+  class: string;
   parent1: string;
   parent2: string;
   siblings: string;
   children: string;
-  isGoodFighter: boolean;
-  isGoodForBreeding: boolean;
+  good_fighter: boolean;
+  good_for_breeding: boolean;
   comment: string;
+  id?: number;
 }
 
 interface TeamType {
@@ -21,7 +18,8 @@ interface TeamType {
 }
 
 interface ScholarType {
-  scholarName: string;
-  team: string;
-  walletId: string;
+  id?: number;
+  team_id?: number;
+  wallet_id: string;
+  name: string;
 }

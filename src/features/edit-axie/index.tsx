@@ -8,15 +8,15 @@ interface Props {
 
 const EditAxie: React.FC<Props> = (props) => {
   const [initialValues, setInitalValues] = useState({
-    axieNumber: "",
-    scholar: "",
-    creatureClass: null,
+    number: "",
+    scholar_id: "",
+    class: "",
     parent1: "",
     parent2: "",
     siblings: "",
     children: "",
-    isGoodFighter: false,
-    isGoodForBreeding: false,
+    good_fighter: false,
+    good_for_breeding: false,
     comment: "",
   });
 

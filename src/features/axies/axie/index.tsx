@@ -1,13 +1,22 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-interface Props {}
+interface Props {
+  axie: AxieType;
+}
 
-const Axie: React.FC<Props> = (props) => {
+const Axie: React.FC<Props> = ({ axie }) => {
   const [isDropdownOpened, setIsDropdownOpened] = useState(false);
   const dropdownStateClass = isDropdownOpened ? "row-drop-down-opened" : "";
   const handleDropDownClick = () => {
     setIsDropdownOpened((e) => !e);
   };
+
+  const handleDeletion = () => {
+    //{`/axies/${axie.id}/edit`}
+  };
+
+  console.log(axie.good_fighter, "from fighter");
+
   return (
     <>
       <tr className='table__row'>
@@ -18,16 +27,19 @@ const Axie: React.FC<Props> = (props) => {
           </span>
         </td>
         <td>
-          <a href='www.google.com' target='_blank'>
-            4614382
+          <a
+            href={`https://marketplace.axieinfinity.com/axie/${axie.number}`}
+            target='_blank'
+          >
+            {axie.number}
           </a>
         </td>
-        <td>33 Carl </td>
-        <td>Plant </td>
-        <td> [1]</td> {/* from zero to seve */}
-        <td>Breeding</td>
-        <td>Fighter</td>
-        <td>Comments goes here </td>
+        <td>{axie.scholar_id} </td>
+        <td>{axie.class} </td>
+        <td> 1</td> {/* from zero to seve */}
+        <td>{axie.good_for_breeding ? "Yes" : "No"}</td>
+        <td>{axie.good_fighter ? "Yes" : "No"}</td>
+        <td>{axie.comment} </td>
       </tr>
       <div className={`row-drop-down ${dropdownStateClass} `}>
         <div className='row-drop-down__content'>
@@ -36,30 +48,30 @@ const Axie: React.FC<Props> = (props) => {
               <span className='row-drop-down__label'>Action</span>{" "}
               <span className='d-inline-block ml-5'>
                 <Link
-                  to='/axies/1/edit'
+                  to={`/axies/${axie.id}/edit`}
                   className='btn btn-primary edit-row-btn'
                 >
                   Edit
                 </Link>
               </span>
-              <a href='?action=delete&id=125' className='btn btn-danger mr-5'>
+              <button onClick={handleDeletion} className='btn btn-danger mr-5'>
                 Delete
-              </a>
+              </button>
             </li>
             <li className='list-group-item'>
-              <span className='row-drop-down__label'>Parent1: </span>{" "}
+              <span className='row-drop-down__label'>
+                Parent1: {axie.parent1}
+              </span>{" "}
             </li>
             <li className='list-group-item'>
-              <span className='row-drop-down__label'>Parent2: </span>{" "}
+              <span className='row-drop-down__label'>
+                Parent2: {axie.parent2}
+              </span>{" "}
             </li>
             <li className='list-group-item'>
-              <span className='row-drop-down__label'>Siblings: </span>{" "}
-            </li>
-            <li className='list-group-item'>
-              <span className='row-drop-down__label'>Created At: </span>{" "}
-            </li>
-            <li className='list-group-item'>
-              <span className='row-drop-down__label'>Updated At: </span>{" "}
+              <span className='row-drop-down__label'>
+                Siblings: {axie.siblings}
+              </span>{" "}
             </li>
           </ul>
         </div>

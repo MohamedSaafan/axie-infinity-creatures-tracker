@@ -37,20 +37,16 @@ const AxieForm: React.FC<Props> = ({
   dangerText,
   handleDanger,
 }) => {
-  const [axieNumber, setAxieNumber] = useState(initialValues.axieNumber);
-  const [scholar, setScholar] = useState(initialValues.scholar);
-  const [creatureClass, setClass] = useState<CreatureClass | null>(
-    initialValues.creatureClass
-  );
+  const [number, setAxieNumber] = useState(initialValues.number);
+  const [scholar_id, setScholar] = useState(initialValues.scholar_id);
+  const [creatureClass, setClass] = useState<string>(initialValues.class);
   const [parent1, setParent1] = useState(initialValues.parent1);
   const [parent2, setParent2] = useState(initialValues.parent2);
   const [siblings, setSiblings] = useState(initialValues.siblings);
   const [children, setChildren] = useState(initialValues.children);
-  const [isGoodFighter, setIsGoodFighter] = useState(
-    initialValues.isGoodFighter
-  );
-  const [isGoodForBreeding, setIsGoodForBreeding] = useState(
-    initialValues.isGoodForBreeding
+  const [good_fighter, setIsGoodFighter] = useState(initialValues.good_fighter);
+  const [good_for_breeding, setIsGoodForBreeding] = useState(
+    initialValues.good_for_breeding
   );
   const [comment, setComment] = useState(initialValues.comment);
 
@@ -100,31 +96,32 @@ const AxieForm: React.FC<Props> = ({
 
   const handleDangerClick = () => {
     handleDanger({
-      axieNumber,
-      scholar,
-      creatureClass,
+      number,
+      scholar_id,
+      class: creatureClass,
       parent1,
       parent2,
       siblings,
       children,
-      isGoodFighter,
-      isGoodForBreeding,
+      good_for_breeding,
+      good_fighter,
       comment,
+      id: initialValues.id,
     });
   };
 
   const handleFormSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleSubmit({
-      axieNumber,
-      scholar,
-      creatureClass,
+      number,
+      scholar_id,
+      class: creatureClass,
       parent1,
       parent2,
       siblings,
       children,
-      isGoodFighter,
-      isGoodForBreeding,
+      good_fighter,
+      good_for_breeding,
       comment,
     });
   };
@@ -138,7 +135,7 @@ const AxieForm: React.FC<Props> = ({
           <input
             className='form-control'
             type='text'
-            value={axieNumber}
+            value={number}
             onChange={handleAxieNumberChange}
             id='number'
           />
@@ -169,11 +166,7 @@ const AxieForm: React.FC<Props> = ({
           class
         </label>
         <div className='col-sm-10'>
-          <select
-            className='form-select'
-            value={creatureClass?.id}
-            id='className'
-          >
+          <select className='form-select' value={creatureClass} id='className'>
             <option disabled selected value=''>
               Select a class
             </option>
@@ -255,7 +248,7 @@ const AxieForm: React.FC<Props> = ({
               className='form-check-input'
               type='checkbox'
               id='good_fighter'
-              checked={isGoodFighter}
+              checked={good_fighter}
               onChange={handleIsGoodFighterChange}
             />
             <label className='form-check-label' htmlFor='good_fighter'>
@@ -272,7 +265,7 @@ const AxieForm: React.FC<Props> = ({
               className='form-check-input'
               type='checkbox'
               id='breeding'
-              checked={isGoodForBreeding}
+              checked={good_for_breeding}
               onChange={handleIsGoodForBreedingChange}
             />
             <label className='form-check-label' htmlFor='breeding'>

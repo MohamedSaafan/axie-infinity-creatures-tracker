@@ -1,21 +1,26 @@
 import { Link } from "react-router-dom";
 
-interface Props {}
+interface Props {
+  scholar: ScholarType;
+}
 
-const Scholar: React.FC<Props> = (props) => {
+const Scholar: React.FC<Props> = ({ scholar }) => {
+  const handleDeleteClick = () => {};
   return (
     <tr>
-      <td>4</td>
-      <td>34 JudithBro</td>
-      <td></td>
-      <td>ronin:7e9702c906844fa1e6ae5431f21d145d02b47307</td>
+      <td>{scholar.id}</td>
       <td>
-        <Link to='/scholars/1/edit' className='btn btn-primary'>
+        {scholar.id} {scholar.name}
+      </td>
+      <td></td>
+      <td>{scholar.wallet_id}</td>
+      <td>
+        <Link to={`/scholars/${scholar.id}/edit`} className='btn btn-primary'>
           Edit
         </Link>
-        <a href='?action=delete&id=39' className='btn btn-danger'>
+        <button onClick={handleDeleteClick} className='btn btn-danger'>
           Delete
-        </a>
+        </button>
       </td>
     </tr>
   );

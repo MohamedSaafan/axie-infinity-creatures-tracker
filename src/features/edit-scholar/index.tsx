@@ -9,8 +9,8 @@ const EditScholar: React.FC<Props> = (props) => {
   console.log(props.match.params.id);
   const [initialValues, setInitialValues] = useState({
     team: "",
-    scholarName: "",
-    walletId: "",
+    wallet_id: "",
+    name: "",
   });
   const handleSaveClick = (values: ScholarType) => {
     console.log(values, "from scholar values");

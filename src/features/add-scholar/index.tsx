@@ -9,9 +9,8 @@ const AddSCholar: React.FC<Props> = () => {
   };
 
   const initialValues: ScholarType = {
-    team: "",
-    scholarName: "",
-    walletId: "",
+    wallet_id: "",
+    name: "",
   };
   return (
     <div className='card shadow'>

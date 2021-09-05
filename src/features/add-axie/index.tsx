@@ -6,10 +6,7 @@ interface Scholar {
   name: string;
   id: string;
 }
-interface CreatureClass {
-  name: string;
-  id: string;
-}
+
 const scholars = [
   {
     name: "37 Jucel",
@@ -34,15 +31,15 @@ const AddAxie: React.FC<Props> = (props) => {
   const handleResetClick = (values: AxieType) => {};
   const handleSaveClick = (values: AxieType) => {};
   const initialValues = {
-    axieNumber: "",
-    scholar: "",
-    creatureClass: null,
+    number: "",
+    scholar_id: "",
+    class: "",
     parent1: "",
     parent2: "",
     siblings: "",
     children: "",
-    isGoodFighter: false,
-    isGoodForBreeding: false,
+    good_fighter: false,
+    good_for_breeding: false,
     comment: "",
   };
 

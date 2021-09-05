@@ -16,15 +16,19 @@ const teams = [
 
 const ScholarForm: React.FC<Props> = ({ initialValues, handleSave }) => {
   const [teams, setTeams] = useState([]);
-  const [scholarName, setScholarName] = useState(initialValues.scholarName);
-  const [team, setTeam] = useState(initialValues.team);
-  const [walletId, setWalletId] = useState(initialValues.walletId);
+  const [name, setScholarName] = useState(initialValues.name);
+  const [team_id, setTeam] = useState(initialValues.team_id);
+  const [wallet_id, setWalletId] = useState(initialValues.wallet_id);
   const handleScholarNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setScholarName(e.target.value);
   };
 
   const handleTeamChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setTeam(e.target.value);
+    let number = +e.target.value;
+    if (isNaN(number)) {
+      return;
+    }
+    setTeam(+e.target.value);
   };
 
   const handleWalletIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +42,7 @@ const ScholarForm: React.FC<Props> = ({ initialValues, handleSave }) => {
   const renderTeamOptions = () => {};
   const handleResetClick = () => {};
   const handleSaveClick = () => {
-    handleSave({ scholarName, team, walletId });
+    handleSave({ name, wallet_id, team_id });
   };
   return (
     <form onSubmit={handleFormSubmit}>
@@ -51,7 +55,7 @@ const ScholarForm: React.FC<Props> = ({ initialValues, handleSave }) => {
             type='text'
             className='form-control'
             id='name'
-            value={scholarName}
+            value={name}
             onChange={handleScholarNameChange}
             required
           />
@@ -66,7 +70,7 @@ const ScholarForm: React.FC<Props> = ({ initialValues, handleSave }) => {
             className='form-select'
             name='team_id'
             id='team_id'
-            value={team}
+            value={team_id}
             onChange={handleTeamChange}
           >
             <option>Select a team</option>
@@ -85,7 +89,7 @@ const ScholarForm: React.FC<Props> = ({ initialValues, handleSave }) => {
             className='form-control'
             id='wallet_id'
             name='wallet_id'
-            value={walletId}
+            value={wallet_id}
             onChange={handleWalletIdChange}
           />
         </div>
