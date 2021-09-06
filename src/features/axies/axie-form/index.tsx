@@ -1,4 +1,6 @@
-import React, { ReactNodeArray, useState } from "react";
+import React, { ReactNodeArray, useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { loadScholarsAsync } from "../../scholars/scholarSlice";
 
 interface Props {
   handleSubmit: (values: AxieType) => void;
@@ -37,9 +39,11 @@ const AxieForm: React.FC<Props> = ({
   dangerText,
   handleDanger,
 }) => {
+  const state = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
   const [number, setAxieNumber] = useState(initialValues.number);
   const [scholar_id, setScholar] = useState(initialValues.scholar_id);
-  const [creatureClass, setClass] = useState<string>(initialValues.class);
+  const [creatureClass, setClass] = useState<string>(initialValues.classname);
   const [parent1, setParent1] = useState(initialValues.parent1);
   const [parent2, setParent2] = useState(initialValues.parent2);
   const [siblings, setSiblings] = useState(initialValues.siblings);
@@ -48,8 +52,11 @@ const AxieForm: React.FC<Props> = ({
   const [good_for_breeding, setIsGoodForBreeding] = useState(
     initialValues.good_for_breeding
   );
+  const [breed_count, setBreed_Count] = useState(initialValues.breed_count);
   const [comment, setComment] = useState(initialValues.comment);
-
+  const handleClassChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setClass(e.target.value);
+  };
   const handleAxieNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAxieNumber(e.target.value);
   };
@@ -57,9 +64,25 @@ const AxieForm: React.FC<Props> = ({
     setScholar(e.target.value);
   };
 
-  const renderScholarsOptions = () => {};
+  const renderCreatureClasses = () => {
+    return (
+      <>
+        {" "}
+        <option value='Bird'>Bird</option>
+        <option value='Beast'>Beast</option>
+        <option value='Aqua'>Aqua</option>
+        <option value='Reptile'>Reptile</option>
+        <option value='Plant'>Plant</option>
+        <option value='Dusk'>Dusk</option>
+        <option value='Mech'>Mech</option>
+        <option value='Dawn'>Dawn</option>
+      </>
+    );
+  };
 
-  const renderCreatureClasses = () => {};
+  const handleBreedCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBreed_Count(+e.target.value);
+  };
 
   const handleParent1Change = (e: React.ChangeEvent<HTMLInputElement>) => {
     setParent1(e.target.value);
@@ -94,11 +117,27 @@ const AxieForm: React.FC<Props> = ({
     setComment(e.target.value);
   };
 
+  useEffect(() => {
+    dispatch(loadScholarsAsync());
+  }, []);
+
+  const renderScholarsOptions = () => {
+    if (state.scholars.values.map) {
+      return state.scholars.values.map((scholar) => {
+        return (
+          <option value={scholar.id} key={scholar.id}>
+            {scholar.name}
+          </option>
+        );
+      });
+    }
+    return <option></option>;
+  };
   const handleDangerClick = () => {
     handleDanger({
       number,
       scholar_id,
-      class: creatureClass,
+      classname: creatureClass,
       parent1,
       parent2,
       siblings,
@@ -107,6 +146,7 @@ const AxieForm: React.FC<Props> = ({
       good_fighter,
       comment,
       id: initialValues.id,
+      breed_count: initialValues.breed_count,
     });
   };
 
@@ -115,7 +155,7 @@ const AxieForm: React.FC<Props> = ({
     handleSubmit({
       number,
       scholar_id,
-      class: creatureClass,
+      classname: creatureClass,
       parent1,
       parent2,
       siblings,
@@ -123,6 +163,7 @@ const AxieForm: React.FC<Props> = ({
       good_fighter,
       good_for_breeding,
       comment,
+      breed_count,
     });
   };
   return (
@@ -166,10 +207,12 @@ const AxieForm: React.FC<Props> = ({
           class
         </label>
         <div className='col-sm-10'>
-          <select className='form-select' value={creatureClass} id='className'>
-            <option disabled selected value=''>
-              Select a class
-            </option>
+          <select
+            className='form-select'
+            value={creatureClass}
+            id='className'
+            onChange={handleClassChange}
+          >
             {renderCreatureClasses()}
           </select>
         </div>
@@ -238,6 +281,20 @@ const AxieForm: React.FC<Props> = ({
           <p className='form-text'>
             Input children (axie number) with comma (,) separator
           </p>
+        </div>
+      </div>
+      <div className='mb-3 row'>
+        <label htmlFor='breedCount' className='col-sm-2 col-form-label'>
+          Breed Count
+        </label>
+        <div className='col-sm-10'>
+          <input
+            type='number'
+            className='form-control'
+            id='breedCount'
+            value={breed_count}
+            onChange={handleBreedCountChange}
+          />
         </div>
       </div>
 

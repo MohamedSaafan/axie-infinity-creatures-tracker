@@ -1,5 +1,8 @@
 import React, { ReactNodeArray, useEffect, useState } from "react";
+import { useHistory } from "react-router";
+import { useAppDispatch } from "../../../app/hooks";
 import AxieForm from "../axie-form";
+import { editAxieAsync } from "../axieSlice";
 
 interface Props {
   initialValues: AxieType;
@@ -7,10 +10,12 @@ interface Props {
 }
 
 const EditAxie: React.FC<Props> = (props) => {
+  const dispatch = useAppDispatch();
+  const history = useHistory();
   const [initialValues, setInitalValues] = useState({
     number: "",
     scholar_id: "",
-    class: "",
+    classname: "",
     parent1: "",
     parent2: "",
     siblings: "",
@@ -18,6 +23,7 @@ const EditAxie: React.FC<Props> = (props) => {
     good_fighter: false,
     good_for_breeding: false,
     comment: "",
+    breed_count: 0,
   });
 
   useEffect(() => {
@@ -26,7 +32,15 @@ const EditAxie: React.FC<Props> = (props) => {
 
   const handleResetClick = (values: AxieType) => {};
   const handleSaveClick = (values: AxieType) => {
-    console.log(values, "from Edit Axies values");
+    dispatch(
+      editAxieAsync({
+        axie: { ...values, id: +props.match.params.id },
+        callback: () => {
+          history.push("/axies");
+          alert("sccuseeded!!!");
+        },
+      })
+    );
   };
 
   return (

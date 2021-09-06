@@ -1,7 +1,7 @@
 interface AxieType {
   number: string;
   scholar_id: string;
-  class: string;
+  classname: string;
   parent1: string;
   parent2: string;
   siblings: string;
@@ -10,6 +10,7 @@ interface AxieType {
   good_for_breeding: boolean;
   comment: string;
   id?: number;
+  breed_count: number;
 }
 
 interface TeamType {

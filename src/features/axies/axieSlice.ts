@@ -17,11 +17,89 @@ export const loadAxiesAsync = createAsyncThunk("axies/fetchCount", async () => {
   const data = await response.json();
   return data;
 });
+export const addAxieAsync = createAsyncThunk(
+  "axies/addAxie",
+  async (
+    { axie, callback }: { axie: AxieType; callback: () => void },
+    { dispatch, rejectWithValue }
+  ) => {
+    try {
+      console.log("from add axie slice");
+      const result = await fetch(
+        "https://068zjqi5jb.execute-api.us-east-2.amazonaws.com/dev/axies",
+        {
+          method: "POST",
+          body: JSON.stringify(axie),
+        }
+      );
+      if (result.status === 200) dispatch(axieSlice.actions.addAxie(axie));
+      callback();
+    } catch (err) {
+      rejectWithValue(err);
+    }
+  }
+);
+export const deleteAxieAsync = createAsyncThunk(
+  "axie/deleteAxie",
+  async (
+    { id, callback }: { id: number; callback: () => void },
+    { dispatch, rejectWithValue }
+  ) => {
+    try {
+      const result = await fetch(
+        `https://068zjqi5jb.execute-api.us-east-2.amazonaws.com/dev/axies/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (result.status === 200) dispatch(axieSlice.actions.deleteAxie(id));
+      callback();
+    } catch (err) {
+      rejectWithValue(err);
+    }
+  }
+);
+export const editAxieAsync = createAsyncThunk(
+  "axies/editAxie",
+  async (
+    { axie, callback }: { axie: AxieType; callback: () => void },
+    { dispatch, rejectWithValue }
+  ) => {
+    try {
+      console.log(JSON.stringify(axie), "from stringify");
+      const result = await fetch(
+        `https://068zjqi5jb.execute-api.us-east-2.amazonaws.com/dev/axies/${axie.id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(axie),
+        }
+      );
+      if (result.status === 200) dispatch(axieSlice.actions.updateAxie(axie));
+      callback();
+    } catch (err) {
+      rejectWithValue(err);
+    }
+  }
+);
 
 const axieSlice = createSlice({
   initialState,
   name: "axies",
-  reducers: {},
+  reducers: {
+    addAxie: (state, action: PayloadAction<AxieType>) => {
+      state.values.push(action.payload);
+    },
+    deleteAxie: (state, action: PayloadAction<number>) => {
+      state.values = state.values.filter((item) => item.id !== action.payload);
+    },
+    updateAxie: (state, action: PayloadAction<AxieType>) => {
+      const filteredValues = state.values.filter(
+        (item) => item.id !== action.payload.id
+      );
+      state.values = [action.payload, ...filteredValues];
+      console.log([action.payload, ...filteredValues], "after the update");
+    },
+  },
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
     builder

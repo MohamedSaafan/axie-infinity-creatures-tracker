@@ -1,5 +1,8 @@
 import React, { ReactNodeArray, useState } from "react";
+import { useHistory } from "react-router";
+import { useAppDispatch } from "../../../app/hooks";
 import AxieForm from "../axie-form";
+import { addAxieAsync } from "../axieSlice";
 
 interface Props {}
 interface Scholar {
@@ -28,12 +31,25 @@ const creatureClass = [
   { name: "Dawn", id: "7" },
 ];
 const AddAxie: React.FC<Props> = (props) => {
+  const dispatch = useAppDispatch();
+  const history = useHistory();
   const handleResetClick = (values: AxieType) => {};
-  const handleSaveClick = (values: AxieType) => {};
+  const handleSaveClick = (values: AxieType) => {
+    console.log(JSON.stringify(values));
+    dispatch(
+      addAxieAsync({
+        axie: values,
+        callback: () => {
+          history.push("/");
+          alert("Succedded!!!");
+        },
+      })
+    );
+  };
   const initialValues = {
     number: "",
     scholar_id: "",
-    class: "",
+    classname: "",
     parent1: "",
     parent2: "",
     siblings: "",
@@ -41,6 +57,7 @@ const AddAxie: React.FC<Props> = (props) => {
     good_fighter: false,
     good_for_breeding: false,
     comment: "",
+    breed_count: 0,
   };
 
   return (

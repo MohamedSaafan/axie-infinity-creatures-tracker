@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAppDispatch } from "../../../app/hooks";
+import { deleteAxieAsync } from "../axieSlice";
 interface Props {
   axie: AxieType;
 }
 
 const Axie: React.FC<Props> = ({ axie }) => {
   const [isDropdownOpened, setIsDropdownOpened] = useState(false);
+  const dispatch = useAppDispatch();
   const dropdownStateClass = isDropdownOpened ? "row-drop-down-opened" : "";
   const handleDropDownClick = () => {
     setIsDropdownOpened((e) => !e);
@@ -13,9 +16,8 @@ const Axie: React.FC<Props> = ({ axie }) => {
 
   const handleDeletion = () => {
     //{`/axies/${axie.id}/edit`}
+    dispatch(deleteAxieAsync({ id: axie.id!, callback: () => {} }));
   };
-
-  console.log(axie.good_fighter, "from fighter");
 
   return (
     <>
@@ -28,15 +30,14 @@ const Axie: React.FC<Props> = ({ axie }) => {
         </td>
         <td>
           <a
-            href={`https://marketplace.axieinfinity.com/axie/${axie.number}`}
+            href={`https://marketplace.axieinfinity.com/axies/${axie.number}`}
             target='_blank'
           >
             {axie.number}
           </a>
         </td>
-        <td>{axie.scholar_id} </td>
-        <td>{axie.class} </td>
-        <td> 1</td> {/* from zero to seve */}
+        <td>{axie.classname} </td>
+        <td> {axie.breed_count}</td> {/* from zero to seve */}
         <td>{axie.good_for_breeding ? "Yes" : "No"}</td>
         <td>{axie.good_fighter ? "Yes" : "No"}</td>
         <td>{axie.comment} </td>

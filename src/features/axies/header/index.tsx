@@ -5,7 +5,6 @@ const Header: React.FC<Props> = (props) => {
     <tr>
       <th>#</th>
       <th>Axie Number</th>
-      <th>Account</th>
       <th>class</th>
       <th>Breed Count</th>
       <th>Breeding</th>

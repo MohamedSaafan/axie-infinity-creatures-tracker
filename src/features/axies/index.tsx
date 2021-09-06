@@ -25,6 +25,7 @@ const Axies: React.FC<Props> = (props) => {
       });
     }
   };
+
   return (
     <div className='card shadow'>
       <div className='card-header'>All Axies</div>
