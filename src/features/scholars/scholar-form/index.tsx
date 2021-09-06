@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { loadTeamAsync } from "../../teams/teamsSlice";
 
 interface Props {
   initialValues: ScholarType;
@@ -15,10 +17,12 @@ const teams = [
 ];
 
 const ScholarForm: React.FC<Props> = ({ initialValues, handleSave }) => {
-  const [teams, setTeams] = useState([]);
+  const state = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
   const [name, setScholarName] = useState(initialValues.name);
   const [team_id, setTeam] = useState(initialValues.team_id);
   const [wallet_id, setWalletId] = useState(initialValues.wallet_id);
+  const saveBtnRef = useRef<HTMLButtonElement>(null);
   const handleScholarNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setScholarName(e.target.value);
   };
@@ -39,11 +43,28 @@ const ScholarForm: React.FC<Props> = ({ initialValues, handleSave }) => {
     e.preventDefault();
   };
 
-  const renderTeamOptions = () => {};
-  const handleResetClick = () => {};
-  const handleSaveClick = () => {
-    handleSave({ name, wallet_id, team_id });
+  const renderTeamOptions = () => {
+    if (state.teams.values) {
+      return state.teams.values.map((team) => {
+        return (
+          <option key={team.id} value={team.id}>
+            {team.name}
+          </option>
+        );
+      });
+    }
+    return <></>;
   };
+  const handleResetClick = () => {};
+  const handleSaveClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    handleSave({ name, wallet_id, team_id });
+    if (saveBtnRef.current) saveBtnRef.current.disabled = true;
+  };
+
+  useEffect(() => {
+    dispatch(loadTeamAsync());
+  }, []);
+
   return (
     <form onSubmit={handleFormSubmit}>
       <div className='mb-3 row'>
@@ -108,6 +129,7 @@ const ScholarForm: React.FC<Props> = ({ initialValues, handleSave }) => {
             type='submit'
             className='btn btn-primary'
             onClick={handleSaveClick}
+            ref={saveBtnRef}
           >
             Save
           </button>

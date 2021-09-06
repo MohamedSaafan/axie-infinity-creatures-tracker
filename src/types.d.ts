@@ -13,8 +13,9 @@ interface AxieType {
 }
 
 interface TeamType {
-  teamName: string;
-  leader: string;
+  leader_id: number;
+  name: string;
+  id?: number;
 }
 
 interface ScholarType {

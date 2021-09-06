@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router";
+import { useAppDispatch } from "../../../app/hooks";
 import TeamForm from "../team-form";
+import { addTeamAsync } from "../teamsSlice";
 
 interface Props {}
 interface Leader {
@@ -8,15 +11,27 @@ interface Leader {
 }
 
 const AddTeam: React.FC<Props> = () => {
+  const history = useHistory();
+  const dispatch = useAppDispatch();
   const handleResetClick = (values: TeamType) => {};
 
   const handleSaveClick = (values: TeamType) => {
-    console.log(values);
+    console.log("from save click!");
+    dispatch(
+      addTeamAsync({
+        team: values,
+        callback: () => {
+          history.push("/teams");
+          alert("success!!!");
+        },
+      })
+    );
   };
 
   const initialValues = {
-    leader: "",
-    teamName: "",
+    name: "",
+    leader_id: 0,
+    id: 0,
   };
 
   return (

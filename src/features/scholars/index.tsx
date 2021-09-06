@@ -13,6 +13,9 @@ const Scholars: React.FC<Props> = (props) => {
     dispatch(loadScholarsAsync());
   }, []);
   const renderScholars = () => {
+    if (!state.scholars.values.map) {
+      return <h3>Some Error Happened please Reload!</h3>;
+    }
     if (state.scholars.status === "pending") {
       return <h1>Loading...... !!!!! </h1>;
     } else if (state.scholars.status === "rejected") {

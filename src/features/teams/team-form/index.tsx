@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { loadScholarsAsync } from "../../scholars/scholarSlice";
 
 interface Props {
   initialValues: TeamType;
@@ -13,21 +15,41 @@ const TeamForm: React.FC<Props> = ({
   handleSave,
   dangerText,
 }) => {
-  const [teamName, setTeamName] = useState(initialValues.leader);
+  const dispatch = useAppDispatch();
+  const state = useAppSelector((state) => state);
+
+  useEffect(() => {
+    dispatch(loadScholarsAsync());
+  }, []);
+
+  const renderScholarsOptions = () => {
+    if (state.scholars.values.map) {
+      return state.scholars.values.map((scholar) => {
+        return (
+          <option value={scholar.id} key={scholar.id}>
+            {scholar.name}
+          </option>
+        );
+      });
+    }
+    return <option></option>;
+  };
+  const [teamName, setTeamName] = useState(initialValues.name);
   const handleTeanNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTeamName(e.target.value);
   };
-  const [leader, setLeader] = useState(initialValues.leader);
+  const [leader, setLeader] = useState(initialValues.leader_id);
   const handleLeaderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setLeader(e.target.value);
+    const value = +e.target.value;
+    if (isNaN(value)) return;
+    setLeader(value);
   };
 
-  const handleDangerClick = () => {
-    handleDanger({ teamName, leader });
-  };
+  const handleDangerClick = () => {};
 
   const handleSaveClick = () => {
-    handleSave({ teamName, leader });
+    console.log("from handel Saved");
+    handleSave({ name: teamName, leader_id: +leader });
   };
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
@@ -65,6 +87,7 @@ const TeamForm: React.FC<Props> = ({
             onChange={handleLeaderChange}
           >
             <option>Select a team</option>
+            {renderScholarsOptions()}
           </select>
         </div>
       </div>

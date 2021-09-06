@@ -1,11 +1,23 @@
 import { Link } from "react-router-dom";
+import { useAppDispatch } from "../../../app/hooks";
+import { deleteScholarAsync } from "../scholarSlice";
 
 interface Props {
   scholar: ScholarType;
 }
 
 const Scholar: React.FC<Props> = ({ scholar }) => {
-  const handleDeleteClick = () => {};
+  const dispatch = useAppDispatch();
+  const handleDeleteClick = () => {
+    dispatch(
+      deleteScholarAsync({
+        id: scholar.id!,
+        callback: () => {
+          console.log("deleted!!!!");
+        },
+      })
+    );
+  };
   return (
     <tr>
       <td>{scholar.id}</td>

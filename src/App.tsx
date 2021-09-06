@@ -4,12 +4,12 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Axies from "./features/axies";
 import Teams from "./features/teams";
 import Scholars from "./features/scholars";
-import AddAxie from "./features/add-axie";
-import AddTeam from "./features/add-team";
-import AddScholar from "./features/add-scholar";
-import EditAxie from "./features/edit-axie";
-import EditTeam from "./features/edit-team";
-import EditScholar from "./features/edit-scholar";
+import AddAxie from "./features/axies/add-axie";
+import AddTeam from "./features/teams/add-team";
+import AddScholar from "./features/scholars/add-scholar";
+import EditAxie from "./features/axies/edit-axie";
+import EditTeam from "./features/teams/edit-team";
+import EditScholar from "./features/scholars/edit-scholar";
 function App() {
   return (
     <BrowserRouter>

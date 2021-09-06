@@ -1,20 +1,34 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router";
+import { useAppDispatch } from "../../../app/hooks";
 import TeamForm from "../team-form";
+import { editTeamAsync } from "../teamsSlice";
 
 interface Props {
   match: { params: { id: string } };
 }
 
 const EditTeam: React.FC<Props> = (props) => {
-  console.log(props.match.params.id);
+  const id = +props.match.params.id;
+  const dispatch = useAppDispatch();
+  const history = useHistory();
   const [initialValues, setInitialValues] = useState({
-    leader: "",
-    teamName: "",
+    leader_id: 0,
+    name: "",
   });
   const handleResetClick = (values: TeamType) => {};
 
   const handleSaveClick = (values: TeamType) => {
-    console.log(values);
+    if (id === 0) return;
+    dispatch(
+      editTeamAsync({
+        team: { ...values, id },
+        callback: () => {
+          history.push("/teams");
+          alert("succeded!!");
+        },
+      })
+    );
   };
 
   return (
