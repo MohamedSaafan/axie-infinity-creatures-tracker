@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import Axie from "./axie";
+import AxiePopUp from "./axie-popup";
 import "./axies.css";
 import { loadAxiesAsync } from "./axieSlice";
 import Header from "./header";
@@ -21,7 +22,11 @@ const Axies: React.FC<Props> = (props) => {
       return <h1>Some Error Happened Please Reload!!!</h1>;
     } else if (state.axies.status === "idle") {
       return state.axies.values.map((axie) => {
-        return <Axie axie={axie} key={axie.id} />;
+        return (
+          <>
+            <Axie axie={axie} key={axie.id} />
+          </>
+        );
       });
     }
   };

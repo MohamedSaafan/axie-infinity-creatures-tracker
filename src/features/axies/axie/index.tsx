@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../../app/hooks";
+import AxiePopUp from "../axie-popup";
 import { deleteAxieAsync } from "../axieSlice";
 interface Props {
   axie: AxieType;
@@ -8,6 +9,7 @@ interface Props {
 
 const Axie: React.FC<Props> = ({ axie }) => {
   const [isDropdownOpened, setIsDropdownOpened] = useState(false);
+  const [isModalOpened, setIsModalOpened] = useState(false);
   const dispatch = useAppDispatch();
   const dropdownStateClass = isDropdownOpened ? "row-drop-down-opened" : "";
   const handleDropDownClick = () => {
@@ -17,6 +19,10 @@ const Axie: React.FC<Props> = ({ axie }) => {
   const handleDeletion = () => {
     //{`/axies/${axie.id}/edit`}
     dispatch(deleteAxieAsync({ id: axie.id!, callback: () => {} }));
+  };
+
+  const openModal = () => {
+    setIsModalOpened(true);
   };
 
   return (
@@ -38,7 +44,17 @@ const Axie: React.FC<Props> = ({ axie }) => {
         </td>
         <td>{axie.classname} </td>
         <td> {axie.breed_count}</td> {/* from zero to seve */}
-        <td>{axie.good_for_breeding ? "Yes" : "No"}</td>
+        <td>
+          {axie.good_for_breeding ? (
+            <>
+              <button className='btn btn-primary' onClick={openModal}>
+                Yes
+              </button>{" "}
+            </>
+          ) : (
+            "No"
+          )}
+        </td>
         <td>{axie.good_fighter ? "Yes" : "No"}</td>
         <td>{axie.comment} </td>
       </tr>
@@ -77,6 +93,11 @@ const Axie: React.FC<Props> = ({ axie }) => {
           </ul>
         </div>
       </div>
+      <AxiePopUp
+        axie={axie}
+        modal={isModalOpened}
+        setModal={setIsModalOpened}
+      />
     </>
   );
 };

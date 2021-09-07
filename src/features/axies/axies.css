@@ -43,3 +43,7 @@
 .edit-row-btn {
   margin-right: 1rem;
 }
+.modal-content {
+  width: 90vw;
+  transform: translateX(-25%);
+}
