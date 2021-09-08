@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
 import { useAppSelector } from "../../../app/hooks";
+import { isIntersect } from "../../../helpers";
 import Axie from "../axie";
 import Header from "../header";
 
@@ -16,51 +16,19 @@ const AxiePopUp: React.FC<Props> = ({ axie, modal, setModal }) => {
   };
 
   const renderAxies = () => {
-    // filter the axies and render them
     let filteredArray: AxieType[] = [];
-    if (axie.parent1 && axie.parent2 && axie.siblings && axie.children) {
-      let parent1List = [axie.parent1];
-      parent1List = parent1List.map((item) => item.trim());
-      let parent2List = [axie.parent2];
-      parent2List = parent2List.map((item) => item.trim());
-      let siblingsList = axie.siblings.split(",");
-      siblingsList = siblingsList.map((item) => item.trim());
-      let childrenList = axie.children.split(",");
-      childrenList = childrenList.map((item) => item.trim());
-
-      filteredArray = axies.filter((axie) => {
+    if (axie.good_for_breeding) {
+      filteredArray = axies.filter((currAxie) => {
         let shouldInclude = true;
-        if (!axie.good_for_breeding) {
-          return false;
-        }
-        let currnParent1List = axie.parent1.split(",");
-        currnParent1List = currnParent1List.map((item) => item.trim());
-        let currParent2List = axie.parent2.split(",");
-        currParent2List = currParent2List.map((item) => item.trim());
-        let currenSiblingsList = axie.siblings.split(",");
-        currenSiblingsList = currenSiblingsList.map((item) => item.trim());
-        let currentChildrenList = axie.children.split(",");
-        currentChildrenList = currenSiblingsList.map((item) => item.trim());
-        currenSiblingsList.forEach((sibling) => {
-          siblingsList.forEach((axieSibling) => {
-            if (sibling === axieSibling) shouldInclude = false;
-          });
-        });
-        currParent2List.forEach((parent) => {
-          parent2List.forEach((parent2) => {
-            if (parent === parent2) shouldInclude = false;
-          });
-        });
-        currnParent1List.forEach((parent) => {
-          parent1List.forEach((parent2) => {
-            if (parent === parent2) shouldInclude = false;
-          });
-        });
-        currentChildrenList.forEach((child) => {
-          childrenList.forEach((axieChild) => {
-            if (child === axieChild) shouldInclude = false;
-          });
-        });
+
+        // check whether it is child or not
+        if (currAxie.number === axie.number) shouldInclude = false;
+        if (currAxie.good_for_breeding === false) shouldInclude = false;
+        if (isIntersect(currAxie.parent1, axie.number)) shouldInclude = false;
+        if (isIntersect(currAxie.parent2, axie.number)) shouldInclude = false;
+
+        if (isIntersect(currAxie.siblings, axie.siblings))
+          shouldInclude = false;
 
         return shouldInclude;
       });
@@ -80,7 +48,7 @@ const AxiePopUp: React.FC<Props> = ({ axie, modal, setModal }) => {
     <Modal isOpen={modal} toggle={toggle}>
       <ModalHeader toggle={toggle}>Good Breeder</ModalHeader>
       <ModalBody className='modal-body'>
-        <table>
+        <table className='table table-striped display responsive nowrap'>
           <thead>
             <Header />
           </thead>
