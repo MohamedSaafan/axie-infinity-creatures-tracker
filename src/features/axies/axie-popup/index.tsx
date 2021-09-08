@@ -8,8 +8,14 @@ interface Props {
   axie: AxieType;
   modal: boolean;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  scholar_name: string;
 }
-const AxiePopUp: React.FC<Props> = ({ axie, modal, setModal }) => {
+const AxiePopUp: React.FC<Props> = ({
+  axie,
+  modal,
+  setModal,
+  scholar_name,
+}) => {
   const axies = useAppSelector((state) => state.axies.values);
   const toggle = () => {
     setModal((status) => !status);
@@ -38,7 +44,7 @@ const AxiePopUp: React.FC<Props> = ({ axie, modal, setModal }) => {
       <>
         {" "}
         {filteredArray.map((axie) => (
-          <Axie axie={axie} />
+          <Axie axie={axie} scholar_name={scholar_name} />
         ))}
       </>
     );

@@ -5,9 +5,10 @@ import AxiePopUp from "../axie-popup";
 import { deleteAxieAsync } from "../axieSlice";
 interface Props {
   axie: AxieType;
+  scholar_name: string;
 }
 
-const Axie: React.FC<Props> = ({ axie }) => {
+const Axie: React.FC<Props> = ({ axie, scholar_name }) => {
   const [isDropdownOpened, setIsDropdownOpened] = useState(false);
   const [isModalOpened, setIsModalOpened] = useState(false);
   const dispatch = useAppDispatch();
@@ -36,13 +37,14 @@ const Axie: React.FC<Props> = ({ axie }) => {
         </td>
         <td>
           <a
-            href={`https://marketplace.axieinfinity.com/axies/${axie.number}`}
+            href={`https://marketplace.axieinfinity.com/axie/${axie.number}`}
             target='_blank'
           >
             {axie.number}
           </a>
         </td>
         <td>{axie.classname} </td>
+        <td>{scholar_name} </td>
         <td> {axie.breed_count}</td> {/* from zero to seve */}
         <td>
           {axie.good_for_breeding ? (
@@ -56,7 +58,7 @@ const Axie: React.FC<Props> = ({ axie }) => {
           )}
         </td>
         <td>{axie.good_fighter ? "Yes" : "No"}</td>
-        <td>{axie.comment} </td>
+        <td>{axie.comment === undefined ? "" : ""} </td>
       </tr>
       <div className={`row-drop-down ${dropdownStateClass} `}>
         <div className='row-drop-down__content'>
@@ -97,6 +99,7 @@ const Axie: React.FC<Props> = ({ axie }) => {
         axie={axie}
         modal={isModalOpened}
         setModal={setIsModalOpened}
+        scholar_name={scholar_name}
       />
     </>
   );

@@ -48,6 +48,8 @@ const EditAxie: React.FC<Props> = (props) => {
       <div className='card-header'>Edit Axie</div>
       <div className='card-body'>
         <AxieForm
+          type='edit'
+          id={props.match.params.id}
           initialValues={initialValues}
           handleDanger={handleResetClick}
           handleSubmit={handleSaveClick}

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import Scholar from "../scholars/scholar";
+import { loadScholarsAsync } from "../scholars/scholarSlice";
 import Axie from "./axie";
 import AxiePopUp from "./axie-popup";
 import "./axies.css";
@@ -13,6 +15,7 @@ const Axies: React.FC<Props> = (props) => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(loadAxiesAsync());
+    dispatch(loadScholarsAsync());
   }, []);
 
   const renderAxies = () => {
@@ -22,9 +25,12 @@ const Axies: React.FC<Props> = (props) => {
       return <h1>Some Error Happened Please Reload!!!</h1>;
     } else if (state.axies.status === "idle") {
       return state.axies.values.map((axie) => {
+        const scholar_name = state.scholars.values.find(
+          (scholar) => scholar.id === +axie.scholar_id
+        )?.name!;
         return (
           <>
-            <Axie axie={axie} key={axie.id} />
+            <Axie axie={axie} key={axie.id} scholar_name={scholar_name} />
           </>
         );
       });

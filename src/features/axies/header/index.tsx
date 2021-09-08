@@ -6,6 +6,7 @@ const Header: React.FC<Props> = (props) => {
       <th>#</th>
       <th>Axie Number</th>
       <th>class</th>
+      <th>Scholar</th>
       <th>Breed Count</th>
       <th>Breeding</th>
       <th>Good Fighter</th>

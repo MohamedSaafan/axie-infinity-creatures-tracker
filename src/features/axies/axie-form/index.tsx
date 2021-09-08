@@ -7,6 +7,8 @@ interface Props {
   initialValues: AxieType;
   dangerText: string;
   handleDanger: (values: AxieType) => void;
+  type?: string;
+  id?: string;
 }
 interface Scholar {
   name: string;
@@ -38,6 +40,8 @@ const AxieForm: React.FC<Props> = ({
   handleSubmit,
   dangerText,
   handleDanger,
+  type,
+  id,
 }) => {
   const state = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
@@ -119,6 +123,24 @@ const AxieForm: React.FC<Props> = ({
 
   useEffect(() => {
     dispatch(loadScholarsAsync());
+  }, []);
+  useEffect(() => {
+    if (type === "edit" && state.axies.values.length) {
+      let initialValues: AxieType;
+      initialValues = state.axies.values.find((axie) => axie.id === +id!)!;
+      console.log(state.axies.values, "from axies");
+      console.log(initialValues, "from initial values");
+      setAxieNumber(initialValues.number);
+      setScholar(initialValues.scholar_id);
+      setClass(initialValues.classname);
+      setParent1(initialValues.parent1);
+      setParent2(initialValues.parent2);
+      setSiblings(initialValues.siblings);
+      setIsGoodFighter(initialValues.good_fighter);
+      setIsGoodForBreeding(initialValues.good_for_breeding);
+      setBreed_Count(initialValues.breed_count);
+      setComment(initialValues.comment);
+    }
   }, []);
 
   const renderScholarsOptions = () => {
