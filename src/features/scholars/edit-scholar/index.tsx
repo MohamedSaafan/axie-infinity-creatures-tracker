@@ -27,7 +27,12 @@ const EditScholar: React.FC<Props> = (props) => {
 
   const handelFormRendering = (initialValues: ScholarType) => {
     return (
-      <ScholarForm initialValues={initialValues} handleSave={handleSaveClick} />
+      <ScholarForm
+        initialValues={initialValues}
+        handleSave={handleSaveClick}
+        id={props.match.params.id}
+        type='edit'
+      />
     );
   };
   const handleSaveClick = (values: ScholarType) => {

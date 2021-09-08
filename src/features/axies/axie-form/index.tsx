@@ -1,5 +1,6 @@
 import React, { ReactNodeArray, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import Scholar from "../../scholars/scholar";
 import { loadScholarsAsync } from "../../scholars/scholarSlice";
 
 interface Props {
@@ -72,14 +73,39 @@ const AxieForm: React.FC<Props> = ({
     return (
       <>
         {" "}
-        <option value='Bird'>Bird</option>
-        <option value='Beast'>Beast</option>
-        <option value='Aqua'>Aqua</option>
-        <option value='Reptile'>Reptile</option>
-        <option value='Plant'>Plant</option>
-        <option value='Dusk'>Dusk</option>
-        <option value='Mech'>Mech</option>
-        <option value='Dawn'>Dawn</option>
+        <option value='Bird' selected={creatureClass === "Bird" ? true : false}>
+          Bird
+        </option>
+        <option
+          value='Beast'
+          selected={creatureClass === "Beast" ? true : false}
+        >
+          Beast
+        </option>
+        <option value='Aqua' selected={creatureClass === "Aqua" ? true : false}>
+          Aqua
+        </option>
+        <option
+          value='Reptile'
+          selected={creatureClass === "Reptile" ? true : false}
+        >
+          Reptile
+        </option>
+        <option
+          value='Plant'
+          selected={creatureClass === "Plant" ? true : false}
+        >
+          Plant
+        </option>
+        <option value='Dusk' selected={creatureClass === "Dusk" ? true : false}>
+          Dusk
+        </option>
+        <option value='Mech' selected={creatureClass === "Mech" ? true : false}>
+          Mech
+        </option>
+        <option value='Dawn' selected={creatureClass === "Dawn" ? true : false}>
+          Dawn
+        </option>
       </>
     );
   };
@@ -147,7 +173,11 @@ const AxieForm: React.FC<Props> = ({
     if (state.scholars.values.map) {
       return state.scholars.values.map((scholar) => {
         return (
-          <option value={scholar.id} key={scholar.id}>
+          <option
+            value={scholar.id}
+            key={scholar.id}
+            selected={+scholar_id === scholar.id ? true : false}
+          >
             {scholar.name}
           </option>
         );
@@ -216,7 +246,7 @@ const AxieForm: React.FC<Props> = ({
             id='scholar_id'
             onChange={handleScholarChange}
           >
-            <option disabled selected value=''>
+            <option disabled value=''>
               Select a scholar
             </option>
             {renderScholarsOptions()}

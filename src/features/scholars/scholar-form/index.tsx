@@ -5,6 +5,8 @@ import { loadTeamAsync } from "../../teams/teamsSlice";
 interface Props {
   initialValues: ScholarType;
   handleSave: (values: ScholarType) => void;
+  type?: string;
+  id?: string;
 }
 
 const teams = [
@@ -16,7 +18,12 @@ const teams = [
   { name: "Alex", id: "2" },
 ];
 
-const ScholarForm: React.FC<Props> = ({ initialValues, handleSave }) => {
+const ScholarForm: React.FC<Props> = ({
+  initialValues,
+  handleSave,
+  id,
+  type,
+}) => {
   const state = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const [name, setScholarName] = useState(initialValues.name);
@@ -47,7 +54,11 @@ const ScholarForm: React.FC<Props> = ({ initialValues, handleSave }) => {
     if (state.teams.values) {
       return state.teams.values.map((team) => {
         return (
-          <option key={team.id} value={team.id}>
+          <option
+            key={team.id}
+            value={team.id}
+            selected={team_id! === team.id ? true : false}
+          >
             {team.name}
           </option>
         );
@@ -64,7 +75,17 @@ const ScholarForm: React.FC<Props> = ({ initialValues, handleSave }) => {
   useEffect(() => {
     dispatch(loadTeamAsync());
   }, []);
+  useEffect(() => {
+    if (type === "edit") {
+      const currScholar = state.scholars.values.find(
+        (scholar) => scholar.id === +id!
+      )!;
 
+      setScholarName(currScholar?.name);
+      setTeam(currScholar?.team_id);
+      setWalletId(currScholar?.wallet_id);
+    }
+  }, []);
   return (
     <form onSubmit={handleFormSubmit}>
       <div className='mb-3 row'>
