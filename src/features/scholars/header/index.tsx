@@ -1,7 +1,6 @@
 const Header: React.FC<{}> = (props) => {
   return (
     <tr>
-      <th>#</th>
       <th>Name</th>
       <th>Team</th>
       <th>Wallet ID</th>

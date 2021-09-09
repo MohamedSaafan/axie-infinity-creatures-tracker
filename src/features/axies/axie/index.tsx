@@ -31,8 +31,11 @@ const Axie: React.FC<Props> = ({ axie, scholar_name }) => {
       <tr className='table__row'>
         <td>
           {" "}
-          <span className='plusicon' onClick={handleDropDownClick}>
-            +
+          <span
+            className={`${isDropdownOpened ? "plusicon--opened" : ""} plusicon`}
+            onClick={handleDropDownClick}
+          >
+            {isDropdownOpened ? "-" : "+"}
           </span>
         </td>
         <td>
@@ -45,7 +48,8 @@ const Axie: React.FC<Props> = ({ axie, scholar_name }) => {
         </td>
         <td>{axie.classname} </td>
         <td>{scholar_name} </td>
-        <td> {axie.breed_count}</td> {/* from zero to seve */}
+        <td> {axie.breed_count ? axie.breed_count : "0"}</td>{" "}
+        {/* from zero to seve */}
         <td>
           {axie.good_for_breeding ? (
             <>
@@ -58,7 +62,13 @@ const Axie: React.FC<Props> = ({ axie, scholar_name }) => {
           )}
         </td>
         <td>{axie.good_fighter ? "Yes" : "No"}</td>
-        <td>{axie.comment === undefined ? "" : ""} </td>
+        <td>
+          {axie.comment === undefined
+            ? ""
+            : axie.comment === "undefined"
+            ? ""
+            : axie.comment}{" "}
+        </td>
       </tr>
       <div className={`row-drop-down ${dropdownStateClass} `}>
         <div className='row-drop-down__content'>

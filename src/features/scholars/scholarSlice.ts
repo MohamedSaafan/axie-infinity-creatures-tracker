@@ -115,6 +115,18 @@ const scholarSlice = createSlice({
         (state, action: PayloadAction<ScholarType[]>) => {
           state.status = "idle";
           state.values = action.payload;
+          state.values.sort((a, b) => {
+            let fa = a.name.toLowerCase(),
+              fb = b.name.toLowerCase();
+
+            if (fa < fb) {
+              return -1;
+            }
+            if (fa > fb) {
+              return 1;
+            }
+            return 0;
+          });
           state.error = null;
         }
       )

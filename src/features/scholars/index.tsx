@@ -21,7 +21,17 @@ const Scholars: React.FC<Props> = (props) => {
     } else if (state.scholars.status === "rejected") {
       return <h1>Some Error Happened Please Reload!!!</h1>;
     } else if (state.scholars.status === "idle") {
-      return state.scholars.values.map((scholar) => {
+      let scholars = [...state.scholars.values];
+      scholars.sort((item1, item2) => {
+        let regExp = /\d+\s/;
+        const name1 = item1.name!;
+        const num1 = +name1.match(regExp)?.join("").trim()!;
+        const name2 = item2.name!;
+        const num2 = +name2.match(regExp)?.join("").trim()!;
+
+        return num1 - num2;
+      });
+      return scholars.map((scholar) => {
         return <Scholar scholar={scholar} key={scholar.id} />;
       });
     }

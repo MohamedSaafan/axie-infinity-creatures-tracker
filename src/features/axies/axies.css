@@ -1,5 +1,5 @@
 .plusicon {
-  background-color: #31b131 !important;
+  background-color: #31b131;
   height: 1em;
   width: 1em;
   display: block;
@@ -13,6 +13,10 @@
   font-family: "Courier New", Courier, monospace;
   line-height: 1em;
   cursor: pointer;
+}
+
+.plusicon--opened {
+  background-color: red !important;
 }
 
 .row-drop-down {

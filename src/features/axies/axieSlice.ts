@@ -88,16 +88,24 @@ const axieSlice = createSlice({
   reducers: {
     addAxie: (state, action: PayloadAction<AxieType>) => {
       state.values.push(action.payload);
+      state.values.sort(
+        (item1, item2) => +item1.scholar_id - +item2.scholar_id
+      );
     },
     deleteAxie: (state, action: PayloadAction<number>) => {
       state.values = state.values.filter((item) => item.id !== action.payload);
+      state.values.sort(
+        (item1, item2) => +item1.scholar_id - +item2.scholar_id
+      );
     },
     updateAxie: (state, action: PayloadAction<AxieType>) => {
       const filteredValues = state.values.filter(
         (item) => item.id !== action.payload.id
       );
       state.values = [action.payload, ...filteredValues];
-      console.log([action.payload, ...filteredValues], "after the update");
+      state.values.sort(
+        (item1, item2) => +item1.scholar_id - +item2.scholar_id
+      );
     },
   },
   extraReducers: (builder) => {
@@ -108,6 +116,9 @@ const axieSlice = createSlice({
         (state, action: PayloadAction<AxieType[]>) => {
           state.status = "idle";
           state.values = action.payload;
+          state.values.sort(
+            (item1, item2) => +item1.scholar_id - +item2.scholar_id
+          );
           state.error = null;
         }
       )

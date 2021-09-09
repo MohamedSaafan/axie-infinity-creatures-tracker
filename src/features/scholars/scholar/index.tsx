@@ -20,10 +20,7 @@ const Scholar: React.FC<Props> = ({ scholar }) => {
   };
   return (
     <tr>
-      <td>{scholar.id}</td>
-      <td>
-        {scholar.id} {scholar.name}
-      </td>
+      <td>{scholar.name}</td>
       <td></td>
       <td>{scholar.wallet_id}</td>
       <td>
