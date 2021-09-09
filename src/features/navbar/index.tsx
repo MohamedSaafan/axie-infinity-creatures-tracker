@@ -20,7 +20,7 @@ const NavBar: React.FC<Props> = (props) => {
     <nav className='navbar navbar-expand-lg navbar-light bg-white shadow'>
       <div className='container'>
         <a className='navbar-brand' href='/'>
-          Achne Infinity
+          Axie Infinity
         </a>
         <button
           className='navbar-toggler'
