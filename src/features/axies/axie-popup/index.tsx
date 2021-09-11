@@ -33,11 +33,9 @@ const AxiePopUp: React.FC<Props> = ({
         if (isIntersect(currAxie.parent1, axie.number)) shouldInclude = false;
         if (isIntersect(currAxie.parent2, axie.number)) shouldInclude = false;
 
-        if (isIntersect(currAxie.siblings, axie.siblings))
-          shouldInclude = false;
-
         return shouldInclude;
       });
+      console.log("filtered array length", filteredArray.length);
     }
 
     return (

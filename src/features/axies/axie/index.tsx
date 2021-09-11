@@ -97,11 +97,6 @@ const Axie: React.FC<Props> = ({ axie, scholar_name }) => {
                 Parent2: {axie.parent2}
               </span>{" "}
             </li>
-            <li className='list-group-item'>
-              <span className='row-drop-down__label'>
-                Siblings: {axie.siblings}
-              </span>{" "}
-            </li>
           </ul>
         </div>
       </div>
