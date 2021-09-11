@@ -40,13 +40,17 @@ const Axies: React.FC<Props> = (props) => {
 
   const sortAxies = (axies: AxieWithName[]) => {
     axies.sort((item1, item2) => {
-      let regExp = /\d+\s/;
-      const name1 = item1.name!;
-      const num1 = +name1.match(regExp)?.join("").trim()!;
-      const name2 = item2.name!;
-      const num2 = +name2.match(regExp)?.join("").trim()!;
+      if (item1.name && item1.name) {
+        let regExp = /\d+\s/;
+        const name1 = item1.name!;
+        const num1 = +name1.match(regExp)?.join("").trim()!;
+        const name2 = item2.name!;
+        const num2 = +name2.match(regExp)?.join("").trim()!;
 
-      return num1 - num2;
+        return num1 - num2;
+      }
+
+      return 1;
     });
 
     return axies;
@@ -84,6 +88,7 @@ const Axies: React.FC<Props> = (props) => {
       let axies = buildAxies(state.axies.values);
 
       axies = sortAxies(axies);
+
       if (keyword) axies = filterAxiesBySearchKeyword(keyword, axies);
       return axies.map(({ axie, name }) => {
         // filterAxiesBySearchKeyword("");

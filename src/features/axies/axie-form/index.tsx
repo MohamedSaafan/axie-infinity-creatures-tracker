@@ -47,8 +47,9 @@ const AxieForm: React.FC<Props> = ({
   const state = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const [number, setAxieNumber] = useState(initialValues.number);
-  const [scholar_id, setScholar] = useState(initialValues.scholar_id);
-  const [creatureClass, setClass] = useState<string>(initialValues.classname);
+  const FIRST_SCHOLAR_ID = "463";
+  const [scholar_id, setScholar] = useState(FIRST_SCHOLAR_ID);
+  const [creatureClass, setClass] = useState<string>("Bird");
   const [parent1, setParent1] = useState(initialValues.parent1);
   const [parent2, setParent2] = useState(initialValues.parent2);
   const [siblings, setSiblings] = useState(initialValues.siblings);
@@ -104,6 +105,9 @@ const AxieForm: React.FC<Props> = ({
           Mech
         </option>
         <option value='Dawn' selected={creatureClass === "Dawn" ? true : false}>
+          Dawn
+        </option>
+        <option value='Bug' selected={creatureClass === "Bug" ? true : false}>
           Dawn
         </option>
       </>

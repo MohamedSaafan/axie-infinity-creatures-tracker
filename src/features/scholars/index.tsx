@@ -32,6 +32,7 @@ const Scholars: React.FC<Props> = (props) => {
         return num1 - num2;
       });
       return scholars.map((scholar) => {
+        console.log(scholar.id);
         return <Scholar scholar={scholar} key={scholar.id} />;
       });
     }
