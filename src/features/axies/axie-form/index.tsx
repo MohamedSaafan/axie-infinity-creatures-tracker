@@ -74,8 +74,8 @@ const AxieForm: React.FC<Props> = ({
     return (
       <>
         {" "}
-        <option value='Bird' selected={creatureClass === "Bird" ? true : false}>
-          Bird
+        <option value='Aqua' selected={creatureClass === "Aqua" ? true : false}>
+          Aqua
         </option>
         <option
           value='Beast'
@@ -83,20 +83,14 @@ const AxieForm: React.FC<Props> = ({
         >
           Beast
         </option>
-        <option value='Aqua' selected={creatureClass === "Aqua" ? true : false}>
-          Aqua
+        <option value='Bird' selected={creatureClass === "Bird" ? true : false}>
+          Bird
         </option>
-        <option
-          value='Reptile'
-          selected={creatureClass === "Reptile" ? true : false}
-        >
-          Reptile
+        <option value='Bug' selected={creatureClass === "Bug" ? true : false}>
+          Bug
         </option>
-        <option
-          value='Plant'
-          selected={creatureClass === "Plant" ? true : false}
-        >
-          Plant
+        <option value='Dawn' selected={creatureClass === "Dawn" ? true : false}>
+          Dawn
         </option>
         <option value='Dusk' selected={creatureClass === "Dusk" ? true : false}>
           Dusk
@@ -104,11 +98,17 @@ const AxieForm: React.FC<Props> = ({
         <option value='Mech' selected={creatureClass === "Mech" ? true : false}>
           Mech
         </option>
-        <option value='Dawn' selected={creatureClass === "Dawn" ? true : false}>
-          Dawn
+        <option
+          value='Plant'
+          selected={creatureClass === "Plant" ? true : false}
+        >
+          Plant
         </option>
-        <option value='Bug' selected={creatureClass === "Bug" ? true : false}>
-          Dawn
+        <option
+          value='Reptile'
+          selected={creatureClass === "Reptile" ? true : false}
+        >
+          Reptile
         </option>
       </>
     );

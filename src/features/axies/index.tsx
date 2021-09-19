@@ -45,7 +45,7 @@ const Axies: React.FC<Props> = (props) => {
         const name1 = item1.name!;
         const num1 = +name1.match(regExp)?.join("").trim()!;
         const name2 = item2.name!;
-        const num2 = +name2.match(regExp)?.join("").trim()!;
+        const num2 = (name2 && +name2.match(regExp)?.join("").trim()!) || 0;
 
         return num1 - num2;
       }
@@ -77,7 +77,6 @@ const Axies: React.FC<Props> = (props) => {
     return axies;
   };
 
-  console.log("rerendered from axies");
   const renderAxies = () => {
     if (state.axies.status === "pending") {
       return <h1>Loading...... !!!!! </h1>;
@@ -91,7 +90,7 @@ const Axies: React.FC<Props> = (props) => {
 
       if (keyword) axies = filterAxiesBySearchKeyword(keyword, axies);
       return axies.map(({ axie, name }) => {
-        // filterAxiesBySearchKeyword("");
+        if (name === undefined) console.log(axie);
         return (
           <>
             <Axie axie={axie} key={axie.id} scholar_name={name!} />
