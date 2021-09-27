@@ -15,7 +15,8 @@ export const loadAxiesAsync = createAsyncThunk("axies/fetchCount", async () => {
     "https://068zjqi5jb.execute-api.us-east-2.amazonaws.com/dev/axies"
   );
   const data = await response.json();
-  return data;
+  if (Array.isArray(data)) return data;
+  return [];
 });
 export const addAxieAsync = createAsyncThunk(
   "axies/addAxie",

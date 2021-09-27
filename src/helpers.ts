@@ -19,3 +19,9 @@ export const isIntersect = (axieString: string, anotherString: string) => {
 
   return shouldContains;
 };
+
+export const sortByCreatureClassName = (axies: AxieType[]) => {
+  axies.sort((a, b) => {
+    return a.classname.localeCompare(b.classname);
+  });
+};

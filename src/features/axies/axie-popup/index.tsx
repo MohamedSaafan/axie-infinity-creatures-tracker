@@ -1,6 +1,6 @@
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
 import { useAppSelector } from "../../../app/hooks";
-import { isIntersect } from "../../../helpers";
+import { isIntersect, sortByCreatureClassName } from "../../../helpers";
 import Axie from "../axie";
 import Header from "../header";
 
@@ -35,9 +35,8 @@ const AxiePopUp: React.FC<Props> = ({
 
         return shouldInclude;
       });
-      console.log("filtered array length", filteredArray.length);
     }
-
+    sortByCreatureClassName(filteredArray);
     return (
       <>
         {" "}

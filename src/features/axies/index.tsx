@@ -83,20 +83,30 @@ const Axies: React.FC<Props> = (props) => {
     } else if (state.axies.status === "rejected") {
       return <h1>Some Error Happened Please Reload!!!</h1>;
     } else if (state.axies.status === "idle") {
+      if (state.axies.values.length === 0) {
+        return (
+          <div>
+            Response Timeout Happened !!! <br /> Please Reload Again
+          </div>
+        );
+      }
       let { keyword } = state.searchBar;
+
       let axies = buildAxies(state.axies.values);
 
       axies = sortAxies(axies);
 
       if (keyword) axies = filterAxiesBySearchKeyword(keyword, axies);
-      return axies.map(({ axie, name }) => {
-        if (name === undefined) console.log(axie);
-        return (
-          <>
-            <Axie axie={axie} key={axie.id} scholar_name={name!} />
-          </>
-        );
-      });
+      if (axies.length) {
+        return axies.map(({ axie, name }) => {
+          if (name === undefined) console.log(axie);
+          return (
+            <>
+              <Axie axie={axie} key={axie.id} scholar_name={name!} />
+            </>
+          );
+        });
+      }
     }
   };
 
