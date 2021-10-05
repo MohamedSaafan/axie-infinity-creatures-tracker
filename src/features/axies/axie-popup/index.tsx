@@ -30,7 +30,13 @@ const AxiePopUp: React.FC<Props> = ({
         // check whether it is child or not
         if (currAxie.number === axie.number) shouldInclude = false;
         if (currAxie.good_for_breeding === false) shouldInclude = false;
+
+        // removing the parents
+        if (isIntersect(currAxie.number, axie.parent1)) shouldInclude = false;
+        if (isIntersect(currAxie.number, axie.parent2)) shouldInclude = false;
+        // removing the siblings
         if (isIntersect(currAxie.parent1, axie.number)) shouldInclude = false;
+
         if (isIntersect(currAxie.parent2, axie.number)) shouldInclude = false;
 
         return shouldInclude;

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import Axies from ".";
 interface State {
   status: "idle" | "pending" | "rejected";
   values: AxieType[];
@@ -66,13 +67,21 @@ export const editAxieAsync = createAsyncThunk(
     { axie, callback }: { axie: AxieType; callback: () => void },
     { dispatch, rejectWithValue }
   ) => {
+    // handle the existence of all the axie properties if it wasn't found
+
+    const copiedAxies = { ...axie };
+
+    if (!copiedAxies.breed_count) copiedAxies.breed_count = 0;
+    if (!copiedAxies.children) copiedAxies.children = "";
+    if (!copiedAxies.parent1) copiedAxies.parent1 = "";
+    if (!copiedAxies.parent2) copiedAxies.parent2 = "";
+    if (!copiedAxies.siblings) copiedAxies.siblings = "";
     try {
-      console.log(JSON.stringify(axie), "from stringify");
       const result = await fetch(
         `https://068zjqi5jb.execute-api.us-east-2.amazonaws.com/dev/axies/${axie.id}`,
         {
           method: "PUT",
-          body: JSON.stringify(axie),
+          body: JSON.stringify(copiedAxies),
         }
       );
       if (result.status === 200) dispatch(axieSlice.actions.updateAxie(axie));
