@@ -1,5 +1,6 @@
 export const isIntersect = (axieString: string, anotherString: string) => {
   let shouldContains = false;
+
   if (axieString === anotherString && axieString === "undefined") {
     shouldContains = false;
     return shouldContains;
@@ -20,8 +21,8 @@ export const isIntersect = (axieString: string, anotherString: string) => {
   return shouldContains;
 };
 
-export const sortByCreatureClassName = (axies: AxieType[]) => {
+export const sortByCreatureBreedType = (axies: AxieType[]) => {
   axies.sort((a, b) => {
-    return a.classname.localeCompare(b.classname);
+    return a.breed_type.localeCompare(b.breed_type);
   });
 };

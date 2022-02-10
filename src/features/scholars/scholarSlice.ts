@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { API_URI } from "../../App";
 
 interface State {
   status: "idle" | "pending" | "rejected";
@@ -14,9 +15,7 @@ const initialState: State = {
 export const loadScholarsAsync = createAsyncThunk(
   "scholars/fetchCount",
   async () => {
-    const response = await fetch(
-      "https://068zjqi5jb.execute-api.us-east-2.amazonaws.com/dev/scholars"
-    );
+    const response = await fetch(`${API_URI}scholars`);
     const data = await response.json();
     return data;
   }
@@ -29,13 +28,13 @@ export const addScholarAsync = createAsyncThunk(
     { dispatch, rejectWithValue }
   ) => {
     try {
-      const result = await fetch(
-        "https://068zjqi5jb.execute-api.us-east-2.amazonaws.com/dev/scholars",
-        {
-          method: "POST",
-          body: JSON.stringify(scholar),
-        }
-      );
+      const result = await fetch(`${API_URI}scholars`, {
+        method: "POST",
+        body: JSON.stringify(scholar),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       if (result.status === 200)
         dispatch(scholarSlice.actions.addScholar(scholar));
       callback();
@@ -51,12 +50,9 @@ export const deleteScholarAsync = createAsyncThunk(
     { dispatch, rejectWithValue }
   ) => {
     try {
-      const result = await fetch(
-        `https://068zjqi5jb.execute-api.us-east-2.amazonaws.com/dev/scholars/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const result = await fetch(`${API_URI}scholars/${id}`, {
+        method: "DELETE",
+      });
       if (result.status === 200)
         dispatch(scholarSlice.actions.deleteScholar(id));
       callback();
@@ -73,13 +69,13 @@ export const editScholarAsync = createAsyncThunk(
   ) => {
     try {
       console.log(JSON.stringify(scholar), "from stringify");
-      const result = await fetch(
-        `https://068zjqi5jb.execute-api.us-east-2.amazonaws.com/dev/scholars/${scholar.id}`,
-        {
-          method: "PUT",
-          body: JSON.stringify(scholar),
-        }
-      );
+      const result = await fetch(`${API_URI}scholars/${scholar.id}`, {
+        method: "PUT",
+        body: JSON.stringify(scholar),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       if (result.status === 200)
         dispatch(scholarSlice.actions.updateScholar(scholar));
       callback();

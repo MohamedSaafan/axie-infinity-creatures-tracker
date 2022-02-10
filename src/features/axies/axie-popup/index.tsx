@@ -1,6 +1,6 @@
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
 import { useAppSelector } from "../../../app/hooks";
-import { isIntersect, sortByCreatureClassName } from "../../../helpers";
+import { isIntersect, sortByCreatureBreedType } from "../../../helpers";
 import Axie from "../axie";
 import Header from "../header";
 
@@ -23,26 +23,28 @@ const AxiePopUp: React.FC<Props> = ({
 
   const renderAxies = () => {
     let filteredArray: AxieType[] = [];
-    if (axie.good_for_breeding) {
+    if (axie.good_breeder) {
       filteredArray = axies.filter((currAxie) => {
         let shouldInclude = true;
 
         // check whether it is child or not
-        if (currAxie.number === axie.number) shouldInclude = false;
-        if (currAxie.good_for_breeding === false) shouldInclude = false;
+        if (currAxie.father === axie.number) shouldInclude = false;
+        if (currAxie.mother === axie.number) shouldInclude = false;
+        if (currAxie.good_breeder === false) shouldInclude = false;
+        if (currAxie.gender === "male") shouldInclude = false;
 
         // removing the parents
-        if (isIntersect(currAxie.number, axie.parent1)) shouldInclude = false;
-        if (isIntersect(currAxie.number, axie.parent2)) shouldInclude = false;
+        if (currAxie.number === axie.father) shouldInclude = false;
+        if (currAxie.number === axie.mother) shouldInclude = false;
         // removing the siblings
-        if (isIntersect(currAxie.parent1, axie.number)) shouldInclude = false;
+        if (currAxie.father === axie.father) shouldInclude = false;
 
-        if (isIntersect(currAxie.parent2, axie.number)) shouldInclude = false;
+        if (currAxie.mother === axie.mother) shouldInclude = false;
 
         return shouldInclude;
       });
     }
-    sortByCreatureClassName(filteredArray);
+    sortByCreatureBreedType(filteredArray);
     return (
       <>
         {" "}
@@ -56,8 +58,8 @@ const AxiePopUp: React.FC<Props> = ({
   return (
     <Modal isOpen={modal} toggle={toggle}>
       <ModalHeader toggle={toggle}>Good Breeder</ModalHeader>
-      <ModalBody className='modal-body'>
-        <table className='table table-striped display responsive nowrap'>
+      <ModalBody className="modal-body">
+        <table className="table table-striped display responsive nowrap">
           <thead>
             <Header />
           </thead>
@@ -65,10 +67,10 @@ const AxiePopUp: React.FC<Props> = ({
         </table>
       </ModalBody>
       <ModalFooter>
-        <Button color='primary' onClick={toggle}>
+        <Button color="primary" onClick={toggle}>
           Ok
         </Button>{" "}
-        <Button color='secondary' onClick={toggle}>
+        <Button color="secondary" onClick={toggle}>
           Cancel
         </Button>
       </ModalFooter>

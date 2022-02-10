@@ -14,16 +14,15 @@ const EditAxie: React.FC<Props> = (props) => {
   const history = useHistory();
   const [initialValues, setInitalValues] = useState({
     number: "",
+    breed_type: "",
     scholar_id: "",
-    classname: "",
-    parent1: "",
-    parent2: "",
-    siblings: "",
-    children: "",
-    good_fighter: false,
-    good_for_breeding: false,
-    comment: "",
     breed_count: 0,
+    good_breeder: false,
+    good_racer: false,
+    father: "",
+    mother: "",
+    comments: "",
+    gender: "male",
   });
 
   useEffect(() => {
@@ -44,16 +43,16 @@ const EditAxie: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className='card shadow'>
-      <div className='card-header'>Edit Axie</div>
-      <div className='card-body'>
+    <div className="card shadow">
+      <div className="card-header">Edit Axie</div>
+      <div className="card-body">
         <AxieForm
-          type='edit'
+          type="edit"
           id={props.match.params.id}
           initialValues={initialValues}
           handleDanger={handleResetClick}
           handleSubmit={handleSaveClick}
-          dangerText='Reset'
+          dangerText="Reset"
         />
       </div>
     </div>

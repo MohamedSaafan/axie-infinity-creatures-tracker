@@ -35,7 +35,7 @@ const AddAxie: React.FC<Props> = (props) => {
   const history = useHistory();
   const handleResetClick = (values: AxieType) => {};
   const handleSaveClick = (values: AxieType) => {
-    console.log(JSON.stringify(values));
+    console.log(JSON.stringify(values), "from add pexies");
     dispatch(
       addAxieAsync({
         axie: values,
@@ -49,26 +49,25 @@ const AddAxie: React.FC<Props> = (props) => {
   const initialValues = {
     number: "",
     scholar_id: "",
-    classname: "",
-    parent1: "",
-    parent2: "",
-    siblings: "",
-    children: "",
-    good_fighter: false,
-    good_for_breeding: false,
-    comment: "",
+    breed_type: "",
+    father: "",
+    mother: "",
+    good_racer: false,
+    good_breeder: false,
+    comments: "",
     breed_count: 0,
+    gender: "",
   };
 
   return (
-    <div className='card shadow'>
-      <div className='card-header'>Add New Axie</div>
-      <div className='card-body'>
+    <div className="card shadow">
+      <div className="card-header">Add New Pexy</div>
+      <div className="card-body">
         <AxieForm
           initialValues={initialValues}
           handleDanger={handleResetClick}
           handleSubmit={handleSaveClick}
-          dangerText='Reset'
+          dangerText="Reset"
         />
       </div>
     </div>

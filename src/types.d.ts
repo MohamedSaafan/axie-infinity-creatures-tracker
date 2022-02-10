@@ -1,16 +1,15 @@
 interface AxieType {
-  number: string;
-  scholar_id: string;
-  classname: string;
-  parent1: string;
-  parent2: string;
-  siblings: string;
-  children: string;
-  good_fighter: boolean;
-  good_for_breeding: boolean;
-  comment: string;
   id?: number;
+  number: string;
+  breed_type: string;
+  scholar_id: string;
   breed_count: number;
+  good_breeder: boolean;
+  good_racer: boolean;
+  comments: string;
+  father: string;
+  mother: string;
+  gender: string;
 }
 
 interface TeamType {

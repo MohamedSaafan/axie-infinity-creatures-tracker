@@ -28,7 +28,7 @@ const Axie: React.FC<Props> = ({ axie, scholar_name }) => {
 
   return (
     <>
-      <tr className='table__row'>
+      <tr className="table__row">
         <td>
           {" "}
           <span
@@ -40,20 +40,21 @@ const Axie: React.FC<Props> = ({ axie, scholar_name }) => {
         </td>
         <td>
           <a
-            href={`https://marketplace.axieinfinity.com/axie/${axie.number}`}
-            target='_blank'
+            href={`https://play.pegaxy.io/my-assets/pega/${axie.number}`}
+            target="_blank"
           >
             {axie.number}
           </a>
         </td>
-        <td>{axie.classname} </td>
+        <td>{axie.breed_type} </td>
         <td>{scholar_name} </td>
+        <td>{axie.gender}</td>
         <td> {axie.breed_count ? axie.breed_count : "0"}</td>{" "}
         {/* from zero to seve */}
         <td>
-          {axie.good_for_breeding ? (
+          {axie.good_breeder ? (
             <>
-              <button className='btn btn-primary' onClick={openModal}>
+              <button className="btn btn-primary" onClick={openModal}>
                 Yes
               </button>{" "}
             </>
@@ -61,40 +62,40 @@ const Axie: React.FC<Props> = ({ axie, scholar_name }) => {
             "No"
           )}
         </td>
-        <td>{axie.good_fighter ? "Yes" : "No"}</td>
+        <td>{axie.good_racer ? "Yes" : "No"}</td>
         <td>
-          {axie.comment === undefined
+          {axie.comments === undefined
             ? ""
-            : axie.comment === "undefined"
+            : axie.comments === "undefined"
             ? ""
-            : axie.comment}{" "}
+            : axie.comments}{" "}
         </td>
       </tr>
       <div className={`row-drop-down ${dropdownStateClass} `}>
-        <div className='row-drop-down__content'>
-          <ul className='list-group'>
-            <li className='list-group-item'>
-              <span className='row-drop-down__label'>Action</span>{" "}
-              <span className='d-inline-block ml-5'>
+        <div className="row-drop-down__content">
+          <ul className="list-group">
+            <li className="list-group-item">
+              <span className="row-drop-down__label">Action</span>{" "}
+              <span className="d-inline-block ml-5">
                 <Link
-                  to={`/axies/${axie.id}/edit`}
-                  className='btn btn-primary edit-row-btn'
+                  to={`/pexies/${axie.id}/edit`}
+                  className="btn btn-primary edit-row-btn"
                 >
                   Edit
                 </Link>
               </span>
-              <button onClick={handleDeletion} className='btn btn-danger mr-5'>
+              <button onClick={handleDeletion} className="btn btn-danger mr-5">
                 Delete
               </button>
             </li>
-            <li className='list-group-item'>
-              <span className='row-drop-down__label'>
-                Parent1: {axie.parent1}
+            <li className="list-group-item">
+              <span className="row-drop-down__label">
+                father: {axie.father}
               </span>{" "}
             </li>
-            <li className='list-group-item'>
-              <span className='row-drop-down__label'>
-                Parent2: {axie.parent2}
+            <li className="list-group-item">
+              <span className="row-drop-down__label">
+                mother: {axie.mother}
               </span>{" "}
             </li>
           </ul>

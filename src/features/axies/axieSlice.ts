@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import Axies from ".";
+import { type } from "os";
+import { API_URI } from "../../App";
 interface State {
   status: "idle" | "pending" | "rejected";
   values: AxieType[];
@@ -11,14 +12,16 @@ const initialState: State = {
   error: null,
 };
 
-export const loadAxiesAsync = createAsyncThunk("axies/fetchCount", async () => {
-  const response = await fetch(
-    "https://068zjqi5jb.execute-api.us-east-2.amazonaws.com/dev/axies"
-  );
-  const data = await response.json();
-  if (Array.isArray(data)) return data;
-  return [];
-});
+export const loadAxiesAsync = createAsyncThunk<any>(
+  "axies/fetchCount",
+  async (argument: any, { rejectWithValue, fulfillWithValue }) => {
+    console.log(argument, "from argument");
+    const response = await fetch(`${API_URI}`);
+    const data = await response.json();
+    if (Array.isArray(data)) return fulfillWithValue(data);
+    return rejectWithValue(data);
+  }
+);
 export const addAxieAsync = createAsyncThunk(
   "axies/addAxie",
   async (
@@ -26,14 +29,14 @@ export const addAxieAsync = createAsyncThunk(
     { dispatch, rejectWithValue }
   ) => {
     try {
-      console.log("from add axie slice");
-      const result = await fetch(
-        "https://068zjqi5jb.execute-api.us-east-2.amazonaws.com/dev/axies",
-        {
-          method: "POST",
-          body: JSON.stringify(axie),
-        }
-      );
+      console.log(JSON.stringify(axie), "from add axie slice");
+      const result = await fetch(`${API_URI}`, {
+        method: "POST",
+        body: JSON.stringify(axie),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       if (result.status === 200) dispatch(axieSlice.actions.addAxie(axie));
       callback();
     } catch (err) {
@@ -48,12 +51,9 @@ export const deleteAxieAsync = createAsyncThunk(
     { dispatch, rejectWithValue }
   ) => {
     try {
-      const result = await fetch(
-        `https://068zjqi5jb.execute-api.us-east-2.amazonaws.com/dev/axies/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const result = await fetch(`${API_URI}${id}`, {
+        method: "DELETE",
+      });
       if (result.status === 200) dispatch(axieSlice.actions.deleteAxie(id));
       callback();
     } catch (err) {
@@ -72,18 +72,16 @@ export const editAxieAsync = createAsyncThunk(
     const copiedAxies = { ...axie };
 
     if (!copiedAxies.breed_count) copiedAxies.breed_count = 0;
-    if (!copiedAxies.children) copiedAxies.children = "";
-    if (!copiedAxies.parent1) copiedAxies.parent1 = "";
-    if (!copiedAxies.parent2) copiedAxies.parent2 = "";
-    if (!copiedAxies.siblings) copiedAxies.siblings = "";
+    if (!copiedAxies.father) copiedAxies.father = "";
+    if (!copiedAxies.mother) copiedAxies.mother = "";
     try {
-      const result = await fetch(
-        `https://068zjqi5jb.execute-api.us-east-2.amazonaws.com/dev/axies/${axie.id}`,
-        {
-          method: "PUT",
-          body: JSON.stringify(copiedAxies),
-        }
-      );
+      const result = await fetch(`${API_URI}${axie.id}`, {
+        method: "PUT",
+        body: JSON.stringify(copiedAxies),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       if (result.status === 200) dispatch(axieSlice.actions.updateAxie(axie));
       callback();
     } catch (err) {

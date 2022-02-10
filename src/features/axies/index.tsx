@@ -65,12 +65,10 @@ const Axies: React.FC<Props> = (props) => {
 
     axies = axies.filter(({ axie, name }) => {
       if (regExp.test(name!)) return true;
-      if (regExp.test(axie.classname)) return true;
-      if (regExp.test(axie.comment)) return true;
-      if (regExp.test(axie.children)) return true;
-      if (regExp.test(axie.parent1)) return true;
-      if (regExp.test(axie.parent2)) return true;
-      if (regExp.test(axie.siblings)) return true;
+      if (regExp.test(axie.breed_type)) return true;
+      if (regExp.test(axie.comments)) return true;
+      if (regExp.test(axie.father)) return true;
+      if (regExp.test(axie.mother)) return true;
     });
 
     axies = sortAxies(axies);
@@ -113,12 +111,12 @@ const Axies: React.FC<Props> = (props) => {
   return (
     <>
       <SearchBar />
-      <div className='card shadow'>
-        <div className='card-header'>All Axies</div>
-        <div className='card-body'>
+      <div className="card shadow">
+        <div className="card-header">All Axies</div>
+        <div className="card-body">
           <table
-            className='table table-striped display responsive nowrap'
-            id='datatable'
+            className="table table-striped display responsive nowrap"
+            id="datatable"
           >
             <thead>
               <Header />

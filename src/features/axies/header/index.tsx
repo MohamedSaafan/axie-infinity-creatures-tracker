@@ -4,12 +4,13 @@ const Header: React.FC<Props> = (props) => {
   return (
     <tr>
       <th>#</th>
-      <th>Axie Number</th>
-      <th>class</th>
+      <th>Pexy Number</th>
+      <th>Breed type</th>
       <th>Scholar</th>
+      <th>Gender</th>
       <th>Breed Count</th>
       <th>Breeding</th>
-      <th>Good Fighter</th>
+      <th>Good Racer</th>
       <th>Comments</th>
     </tr>
   );

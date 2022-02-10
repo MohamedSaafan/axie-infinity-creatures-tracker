@@ -17,37 +17,37 @@ const NavBar: React.FC<Props> = (props) => {
   };
 
   return (
-    <nav className='navbar navbar-expand-lg navbar-light bg-white shadow'>
-      <div className='container'>
-        <a className='navbar-brand' href='/'>
-          Axie Infinity
+    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow">
+      <div className="container">
+        <a className="navbar-brand" href="/">
+          Pexy
         </a>
         <button
-          className='navbar-toggler'
-          type='button'
-          data-bs-toggle='collapse'
-          data-bs-target='#navbarSupportedContent'
-          aria-controls='navbarSupportedContent'
-          aria-expanded='false'
-          aria-label='Toggle navigation'
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
-          <span className='navbar-toggler-icon'></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div className='collapse navbar-collapse' id='navbarSupportedContent'>
-          <ul className='navbar-nav ms-auto mb-2 mb-lg-0'>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             <NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
-                  Axie
+                  Pexy
                 </DropdownToggle>
                 <DropdownMenu right>
                   {" "}
                   <DropdownItem>
-                    <NavLink to='/axies'>All Axies</NavLink>
+                    <NavLink to="/pexies">All Pexies</NavLink>
                   </DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem>
-                    <NavLink to='/axies/add'>Add Axie</NavLink>
+                    <NavLink to="/pexies/add">Add Pexy</NavLink>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
@@ -59,11 +59,11 @@ const NavBar: React.FC<Props> = (props) => {
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>
-                    <NavLink to='/scholars'>All Scholars</NavLink>
+                    <NavLink to="/scholars">All Scholars</NavLink>
                   </DropdownItem>
                   <DropdownItem divider />{" "}
                   <DropdownItem>
-                    <NavLink to='/scholars/add'>Add Scholar</NavLink>
+                    <NavLink to="/scholars/add">Add Scholar</NavLink>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
@@ -75,11 +75,11 @@ const NavBar: React.FC<Props> = (props) => {
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>
-                    <NavLink to='/teams'>Teams</NavLink>
+                    <NavLink to="/teams">Teams</NavLink>
                   </DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem>
-                    <NavLink to='/teams/add'>Add Team</NavLink>
+                    <NavLink to="/teams/add">Add Team</NavLink>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>

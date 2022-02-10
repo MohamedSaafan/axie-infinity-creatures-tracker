@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { API_URI } from "../../App";
 
 interface State {
   status: "idle" | "pending" | "rejected";
@@ -12,9 +13,7 @@ const initialState: State = {
 };
 
 export const loadTeamAsync = createAsyncThunk("teams/fetchTeams", async () => {
-  const response = await fetch(
-    "https://068zjqi5jb.execute-api.us-east-2.amazonaws.com/dev/teams"
-  );
+  const response = await fetch(`${API_URI}teams`);
   const data = await response.json();
   return data;
 });
@@ -27,13 +26,13 @@ export const addTeamAsync = createAsyncThunk(
   ) => {
     try {
       console.log("from add team slice");
-      const result = await fetch(
-        "https://068zjqi5jb.execute-api.us-east-2.amazonaws.com/dev/teams",
-        {
-          method: "POST",
-          body: JSON.stringify(team),
-        }
-      );
+      const result = await fetch(`${API_URI}teams`, {
+        method: "POST",
+        body: JSON.stringify(team),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       if (result.status === 200) dispatch(teamSlice.actions.addTeam(team));
       callback();
     } catch (err) {
@@ -48,12 +47,9 @@ export const deleteTeamAsync = createAsyncThunk(
     { dispatch, rejectWithValue }
   ) => {
     try {
-      const result = await fetch(
-        `https://068zjqi5jb.execute-api.us-east-2.amazonaws.com/dev/teams/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const result = await fetch(`${API_URI}teams/${id}`, {
+        method: "DELETE",
+      });
       if (result.status === 200) dispatch(teamSlice.actions.deleteTeam(id));
       callback();
     } catch (err) {
@@ -69,13 +65,13 @@ export const editTeamAsync = createAsyncThunk(
   ) => {
     try {
       console.log(JSON.stringify(team), "from stringify");
-      const result = await fetch(
-        `https://068zjqi5jb.execute-api.us-east-2.amazonaws.com/dev/teams/${team.id}`,
-        {
-          method: "PUT",
-          body: JSON.stringify(team),
-        }
-      );
+      const result = await fetch(`${API_URI}teams/${team.id}`, {
+        method: "PUT",
+        body: JSON.stringify(team),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       if (result.status === 200) dispatch(teamSlice.actions.updateTeam(team));
       callback();
     } catch (err) {
