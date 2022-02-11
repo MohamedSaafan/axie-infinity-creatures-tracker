@@ -10,7 +10,7 @@ import AddScholar from "./features/scholars/add-scholar";
 import EditAxie from "./features/axies/edit-axie";
 import EditTeam from "./features/teams/edit-team";
 import EditScholar from "./features/scholars/edit-scholar";
-export const API_URI = "http://localhost:8080/";
+export const API_URI = "https://sheltered-plains-16191.herokuapp.com/";
 function App() {
   return (
     <BrowserRouter>

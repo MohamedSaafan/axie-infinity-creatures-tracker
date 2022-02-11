@@ -69,6 +69,7 @@ export const editScholarAsync = createAsyncThunk(
   ) => {
     try {
       console.log(JSON.stringify(scholar), "from stringify");
+      console.log(`${API_URI}scholars/${scholar.id}`, "from scholar id");
       const result = await fetch(`${API_URI}scholars/${scholar.id}`, {
         method: "PUT",
         body: JSON.stringify(scholar),
