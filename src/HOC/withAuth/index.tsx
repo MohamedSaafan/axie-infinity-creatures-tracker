@@ -17,7 +17,7 @@ const WithAuth: React.FC<Props> = (props) => {
   const handleSubmitClick = () => {
     dispatch(changePassword(password));
   };
-  if (globalState.password === "password") return <>{props.children}</>;
+  if (globalState.password === "Track123") return <>{props.children}</>;
 
   return (
     <div>
