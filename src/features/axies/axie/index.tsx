@@ -63,6 +63,7 @@ const Axie: React.FC<Props> = ({ axie, scholar_name }) => {
           )}
         </td>
         <td>{axie.good_racer ? "Yes" : "No"}</td>
+        <td>{axie.team_name}</td>
         <td>
           {axie.comments === undefined
             ? ""
@@ -78,7 +79,7 @@ const Axie: React.FC<Props> = ({ axie, scholar_name }) => {
               <span className="row-drop-down__label">Action</span>{" "}
               <span className="d-inline-block ml-5">
                 <Link
-                  to={`/pexies/${axie.id}/edit`}
+                  to={`/pegs/${axie.id}/edit`}
                   className="btn btn-primary edit-row-btn"
                 >
                   Edit

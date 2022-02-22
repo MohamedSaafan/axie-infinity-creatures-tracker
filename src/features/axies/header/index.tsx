@@ -11,6 +11,7 @@ const Header: React.FC<Props> = (props) => {
       <th>Breed Count</th>
       <th>Breeding</th>
       <th>Good Racer</th>
+      <th>Team Name</th>
       <th>Comments</th>
     </tr>
   );

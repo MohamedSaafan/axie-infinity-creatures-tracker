@@ -43,11 +43,11 @@ const NavBar: React.FC<Props> = (props) => {
                 <DropdownMenu right>
                   {" "}
                   <DropdownItem>
-                    <NavLink to="/pexies">All Pexies</NavLink>
+                    <NavLink to="/pegs">All Pegs</NavLink>
                   </DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem>
-                    <NavLink to="/pexies/add">Add Pexy</NavLink>
+                    <NavLink to="/pegs/add">Add Pexy</NavLink>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>

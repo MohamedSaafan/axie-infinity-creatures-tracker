@@ -15,18 +15,18 @@ const SearchBar: React.FC<Props> = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <div className='input-group mb-3'>
+      <div className="input-group mb-3">
         <input
-          type='text'
-          className='form-control'
+          type="text"
+          className="form-control"
           value={state.searchBar.keyword}
           onChange={handleInputChange}
-          placeholder='Search On Axies'
+          placeholder="Search On Pegs"
           aria-label="Recipient's username"
-          aria-describedby='basic-addon2'
+          aria-describedby="basic-addon2"
         />
-        <div className='input-group-append'>
-          <span className='input-group-text' id='basic-addon2'>
+        <div className="input-group-append">
+          <span className="input-group-text" id="basic-addon2">
             Enter any Keyword
           </span>
         </div>

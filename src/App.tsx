@@ -17,16 +17,16 @@ function App() {
       <NavBar />
       <div className="container mt-5">
         <Switch>
-          <Route path="/pexies" exact component={Axies} />
-          <Route path="/pexies/add" component={AddAxie} />
-          <Route path="/pexies/:id/edit" component={EditAxie} />
+          <Route path="/pegs" exact component={Axies} />
+          <Route path="/pegs/add" component={AddAxie} />
+          <Route path="/pegs/:id/edit" component={EditAxie} />
           <Route path="/teams" exact component={Teams} />
           <Route path="/teams/add" component={AddTeam} />
           <Route path="/teams/:id/edit" component={EditTeam} />
           <Route path="/scholars" exact component={Scholars} />
           <Route path="/scholars/add" component={AddScholar} />
           <Route path="/scholars/:id/edit" component={EditScholar} />
-          <Redirect to="/pexies" />
+          <Redirect to="/pegs" />
         </Switch>
       </div>
     </BrowserRouter>

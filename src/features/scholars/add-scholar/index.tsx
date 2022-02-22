@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router";
 import { useAppDispatch } from "../../../app/hooks";
 import ScholarForm from "../scholar-form";
-import { addScholarAsync } from "../../scholars/scholarSlice";
+import { addScholarAsync } from "../scholarSlice";
 
 interface Props {}
 

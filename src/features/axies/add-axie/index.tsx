@@ -35,7 +35,7 @@ const AddAxie: React.FC<Props> = (props) => {
   const history = useHistory();
   const handleResetClick = (values: AxieType) => {};
   const handleSaveClick = (values: AxieType) => {
-    console.log(JSON.stringify(values), "from add pexies");
+    console.log(JSON.stringify(values), "from add pegs");
     dispatch(
       addAxieAsync({
         axie: values,
@@ -57,6 +57,7 @@ const AddAxie: React.FC<Props> = (props) => {
     comments: "",
     breed_count: 0,
     gender: "",
+    team_name: "",
   };
 
   return (

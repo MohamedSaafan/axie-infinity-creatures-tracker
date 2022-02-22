@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import ScholarForm from "../scholar-form";
-import { editScholarAsync } from "../../scholars/scholarSlice";
+import { editScholarAsync } from "../scholarSlice";
 
 interface Props {
   match: { params: { id: string } };

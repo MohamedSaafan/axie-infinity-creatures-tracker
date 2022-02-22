@@ -10,6 +10,7 @@ interface AxieType {
   father: string;
   mother: string;
   gender: string;
+  team_name: string;
 }
 
 interface TeamType {

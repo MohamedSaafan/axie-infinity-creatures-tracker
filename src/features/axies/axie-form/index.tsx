@@ -57,6 +57,7 @@ const AxieForm: React.FC<Props> = ({
     initialValues.good_breeder
   );
   const [gender, setGender] = useState(initialValues.gender);
+  const [team_name, setTeamName] = useState(initialValues.team_name);
 
   const [breed_count, setBreed_Count] = useState(initialValues.breed_count);
   const [comments, setComments] = useState(initialValues.comments);
@@ -100,6 +101,10 @@ const AxieForm: React.FC<Props> = ({
         </option>
       </>
     );
+  };
+
+  const handleTeamNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTeamName(e.target.value);
   };
 
   const handleBreedCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -149,6 +154,7 @@ const AxieForm: React.FC<Props> = ({
       setIsGoodForBreeding(initialValues.good_breeder);
       setBreed_Count(initialValues.breed_count);
       setComments(initialValues.comments);
+      setTeamName(initialValues.team_name);
     }
   }, []);
 
@@ -181,6 +187,7 @@ const AxieForm: React.FC<Props> = ({
       breed_count: initialValues.breed_count,
       comments,
       gender,
+      team_name,
     });
   };
 
@@ -197,6 +204,7 @@ const AxieForm: React.FC<Props> = ({
       breed_count,
       gender,
       breed_type,
+      team_name,
     });
   };
   return (
@@ -277,6 +285,20 @@ const AxieForm: React.FC<Props> = ({
             id="mother"
             value={mother}
             onChange={handlemotherChange}
+          />
+        </div>
+      </div>
+      <div className="mb-3 row">
+        <label htmlFor="teamName" className="col-sm-2 col-form-label">
+          Team Name
+        </label>
+        <div className="col-sm-10">
+          <input
+            type="text"
+            className="form-control"
+            id="teamName"
+            value={team_name}
+            onChange={handleTeamNameChange}
           />
         </div>
       </div>

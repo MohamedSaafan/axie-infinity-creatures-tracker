@@ -23,11 +23,10 @@ const EditAxie: React.FC<Props> = (props) => {
     mother: "",
     comments: "",
     gender: "male",
+    team_name: "",
   });
 
-  useEffect(() => {
-    console.log(props.match.params.id);
-  }, []);
+  useEffect(() => {}, []);
 
   const handleResetClick = (values: AxieType) => {};
   const handleSaveClick = (values: AxieType) => {
