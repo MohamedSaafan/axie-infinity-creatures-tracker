@@ -10,24 +10,27 @@ import AddScholar from "./features/scholars/add-scholar";
 import EditAxie from "./features/axies/edit-axie";
 import EditTeam from "./features/teams/edit-team";
 import EditScholar from "./features/scholars/edit-scholar";
+import WithAuth from "./HOC/withAuth";
 export const API_URI = "https://sheltered-plains-16191.herokuapp.com/";
 function App() {
   return (
     <BrowserRouter>
       <NavBar />
       <div className="container mt-5">
-        <Switch>
-          <Route path="/pegs" exact component={Axies} />
-          <Route path="/pegs/add" component={AddAxie} />
-          <Route path="/pegs/:id/edit" component={EditAxie} />
-          <Route path="/teams" exact component={Teams} />
-          <Route path="/teams/add" component={AddTeam} />
-          <Route path="/teams/:id/edit" component={EditTeam} />
-          <Route path="/scholars" exact component={Scholars} />
-          <Route path="/scholars/add" component={AddScholar} />
-          <Route path="/scholars/:id/edit" component={EditScholar} />
-          <Redirect to="/pegs" />
-        </Switch>
+        <WithAuth>
+          <Switch>
+            <Route path="/pegs" exact component={Axies}></Route>
+            <Route path="/pegs/add" component={AddAxie} />
+            <Route path="/pegs/:id/edit" component={EditAxie} />
+            <Route path="/teams" exact component={Teams} />
+            <Route path="/teams/add" component={AddTeam} />
+            <Route path="/teams/:id/edit" component={EditTeam} />
+            <Route path="/scholars" exact component={Scholars} />
+            <Route path="/scholars/add" component={AddScholar} />
+            <Route path="/scholars/:id/edit" component={EditScholar} />
+            <Redirect to="/pegs" />
+          </Switch>
+        </WithAuth>
       </div>
     </BrowserRouter>
   );
